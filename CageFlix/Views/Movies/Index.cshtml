@@ -62,7 +62,7 @@
             else
             {
                 <div class="addMovieContainer">
-                    @if (Model.UserMovies.Select(um => um.MovieID).Contains(movie.ID))
+                    @if (Model.UserMovies != null && Model.UserMovies.Select(um => um.MovieID).Contains(movie.ID))
                     {
                         <p><i class="icon-check"></i> You've seen this movie</p>
                     }
