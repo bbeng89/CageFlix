@@ -220,6 +220,10 @@
     <Compile Include="Migrations\201307070610355_ReleaseYearAndNetflixLink.Designer.cs">
       <DependentUpon>201307070610355_ReleaseYearAndNetflixLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201307071759136_UpdatedMovieTable.cs" />
+    <Compile Include="Migrations\201307071759136_UpdatedMovieTable.Designer.cs">
+      <DependentUpon>201307071759136_UpdatedMovieTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\UserMovie.cs" />
@@ -381,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201307070610355_ReleaseYearAndNetflixLink.resx">
       <DependentUpon>201307070610355_ReleaseYearAndNetflixLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201307071759136_UpdatedMovieTable.resx">
+      <DependentUpon>201307071759136_UpdatedMovieTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

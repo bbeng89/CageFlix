@@ -23,9 +23,37 @@ namespace CageFlix.Models
         [MaxLength(250)]
         public string Title { get; set; }
 
-        [Required]
         [Display(Name = "Year Released")]
-        public int ReleaseYear { get; set; }
+        public int? ReleaseYear { get; set; }
+
+        [Url]
+        public string ThumnailImageUrl { get; set; }
+
+        [Url]
+        public string ProfileImageUrl { get; set; }
+
+        [Url]
+        public string DetailedImageUrl { get; set; }
+
+        [Url]
+        public string OriginalImageUrl { get; set; }
+
+        [MaxLength(10)]
+        public string MpaaRating { get; set; }
+
+        public int? Runtime { get; set; }
+
+        [MaxLength(5000)]
+        public string CriticsConsensus { get; set; }
+
+        [MaxLength(5000)]
+        public string Synopsis { get; set; }
+
+        //External Links
+
+        [Url]
+        [Display(Name = "Rotten Tomatoes API Url")]
+        public string RottenTomatoesApiUrl { get; set; }
 
         [Url]
         [Display(Name = "IMDB Link")]
