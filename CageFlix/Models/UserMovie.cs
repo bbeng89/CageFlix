@@ -22,6 +22,12 @@ namespace CageFlix.Models
 
         public int Rating { get; set; }
 
+        [MaxLength(8000)]
+        public string Shits { get; set; }
+
+        [MaxLength(8000)]
+        public string Giggles { get; set; }
+
         public virtual UserProfile UserProfile { get; set; }
 
         public virtual Movie Movie { get; set; }
