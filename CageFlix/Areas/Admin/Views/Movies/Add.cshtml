@@ -7,6 +7,8 @@
 
 @using (Html.BeginForm())
 {
+    <legend>Details</legend>
+    
     @Html.LabelFor(m => m.Title)
     @Html.TextBoxFor(m => m.Title, new { @class = "input-xxlarge" })
     @Html.ValidationMessageFor(m => m.Title)
@@ -14,6 +16,49 @@
     @Html.LabelFor(m => m.ReleaseYear)
     @Html.TextBoxFor(m => m.ReleaseYear)
     @Html.ValidationMessageFor(m => m.ReleaseYear)
+
+    @Html.LabelFor(m => m.MpaaRating)
+    @Html.TextBoxFor(m => m.MpaaRating, new { @class = "input-mini" })
+    @Html.ValidationMessageFor(m => m.MpaaRating)
+
+    @Html.LabelFor(m => m.Runtime)
+    @Html.TextBoxFor(m => m.Runtime, new { @class = "input-mini" }) <span class="muted">minutes</span>
+    @Html.ValidationMessageFor(m => m.Runtime)
+
+    @Html.LabelFor(m => m.CriticsConsensus)
+    @Html.TextAreaFor(m => m.CriticsConsensus, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.CriticsConsensus)
+
+    @Html.LabelFor(m => m.Synopsis)
+    @Html.TextAreaFor(m => m.Synopsis, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.Synopsis)
+
+    <legend>Images</legend>
+    
+    @Html.LabelFor(m => m.ThumnailImageUrl)
+    @Html.TextBoxFor(m => m.ThumnailImageUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.ThumnailImageUrl)
+
+    @Html.LabelFor(m => m.ProfileImageUrl)
+    @Html.TextBoxFor(m => m.ProfileImageUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.ProfileImageUrl)
+
+
+    @Html.LabelFor(m => m.DetailedImageUrl)
+    @Html.TextBoxFor(m => m.DetailedImageUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.DetailedImageUrl)
+
+
+    @Html.LabelFor(m => m.OriginalImageUrl)
+    @Html.TextBoxFor(m => m.OriginalImageUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.OriginalImageUrl)
+
+
+    <legend>Links</legend>
+
+    @Html.LabelFor(m => m.RottenTomatoesApiUrl)
+    @Html.TextBoxFor(m => m.RottenTomatoesApiUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.RottenTomatoesApiUrl)
 
     @Html.LabelFor(m => m.ImdbLink)
     @Html.TextBoxFor(m => m.ImdbLink, new { @class = "input-xxlarge" })
@@ -27,9 +72,43 @@
     @Html.TextBoxFor(m => m.NetflixLink, new { @class = "input-xxlarge" })
     @Html.ValidationMessageFor(m => m.NetflixLink)
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button id="rtSync" type="button" class="btn pull-left">Pull Data From Rotten Tomatoes</button>
+    <button type="submit" class="btn btn-primary pull-right">Save Changes</button>
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#rtSync').click(function () {
+                var url = $('#RottenTomatoesApiUrl').val();
+                var apikey = '@CageFlix.Helpers.RottenTomatoesHelpers.ApiKey';
+                var fullUrl = url + '?apikey=' + apikey;
+                if (url) {
+                    $.ajax({
+                        url: $.trim(fullUrl),
+                        dataType: "jsonp",
+                        success: RTCallback
+                    });
+                }
+                else {
+                    alert("Rotten Tomatoes API Url not set. Set this value then try again.");
+                }
+            });
+        });
+
+        function RTCallback(data) {
+            $('#Title').val(data.title);
+            $('#ReleaseYear').val(data.year);
+            $('#MpaaRating').val(data.mpaa_rating);
+            $('#Runtime').val(data.runtime);
+            $('#CriticsConsensus').val(data.critics_consensus);
+            $('#Synopsis').val(data.synopsis);
+            $('#ThumnailImageUrl').val(data.posters.thumbnail);
+            $('#ProfileImageUrl').val(data.posters.profile);
+            $('#DetailedImageUrl').val(data.posters.detailed);
+            $('#OriginalImageUrl').val(data.posters.original);
+            $('#RottenTomatoesLink').val(data.links.alternate);
+        }
+    </script>
 }

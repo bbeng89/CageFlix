@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 
 namespace CageFlix.Areas.Admin.Controllers
 {
@@ -53,13 +54,8 @@ namespace CageFlix.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                //TODO: we may want to use AutoMapper here if we end up using it anywhere else
                 var dbMovie = db.MovieRepository.GetByID(movie.ID);
-                dbMovie.Title = movie.Title;
-                dbMovie.ReleaseYear = movie.ReleaseYear;
-                dbMovie.ImdbLink = movie.ImdbLink;
-                dbMovie.RottenTomatoesLink = movie.RottenTomatoesLink;
-                dbMovie.NetflixLink = movie.NetflixLink;
+                AutoMapper.Mapper.Map<Movie, Movie>(movie, dbMovie);
                 db.Save();
                 this.SetAlert("Successfully updated movie " + movie.Title, AlertType.Success);
                 return RedirectToAction("index", "movies");

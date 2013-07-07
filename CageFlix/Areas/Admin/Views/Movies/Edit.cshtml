@@ -3,10 +3,12 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Add Movie</h2>
+<h2>Edit Movie</h2>
 
 @using (Html.BeginForm())
 {
+    <legend>Details</legend>
+    
     @Html.LabelFor(m => m.Title)
     @Html.TextBoxFor(m => m.Title, new { @class = "input-xxlarge" })
     @Html.ValidationMessageFor(m => m.Title)
@@ -14,6 +16,66 @@
     @Html.LabelFor(m => m.ReleaseYear)
     @Html.TextBoxFor(m => m.ReleaseYear)
     @Html.ValidationMessageFor(m => m.ReleaseYear)
+
+    @Html.LabelFor(m => m.MpaaRating)
+    @Html.TextBoxFor(m => m.MpaaRating, new { @class = "input-mini" })
+    @Html.ValidationMessageFor(m => m.MpaaRating)
+
+    @Html.LabelFor(m => m.Runtime)
+    @Html.TextBoxFor(m => m.Runtime, new { @class = "input-mini" }) <span class="muted">minutes</span>
+    @Html.ValidationMessageFor(m => m.Runtime)
+
+    @Html.LabelFor(m => m.CriticsConsensus)
+    @Html.TextAreaFor(m => m.CriticsConsensus, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.CriticsConsensus)
+
+    @Html.LabelFor(m => m.Synopsis)
+    @Html.TextAreaFor(m => m.Synopsis, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.Synopsis)
+
+    <legend>Images</legend>
+    
+    @Html.LabelFor(m => m.ThumnailImageUrl)
+    @Html.TextBoxFor(m => m.ThumnailImageUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.ThumnailImageUrl)
+
+    if (Model.ThumnailImageUrl != null)
+    {
+        <p><a href="@Model.ThumnailImageUrl">View Image</a></p>
+    }
+
+    @Html.LabelFor(m => m.ProfileImageUrl)
+    @Html.TextBoxFor(m => m.ProfileImageUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.ProfileImageUrl)
+
+    if (Model.ProfileImageUrl != null)
+    {
+        <p><a href="@Model.ProfileImageUrl">View Image</a></p>
+    }
+
+    @Html.LabelFor(m => m.DetailedImageUrl)
+    @Html.TextBoxFor(m => m.DetailedImageUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.DetailedImageUrl)
+
+    if (Model.DetailedImageUrl != null)
+    {
+        <p><a href="@Model.DetailedImageUrl">View Image</a></p>
+    }
+
+    @Html.LabelFor(m => m.OriginalImageUrl)
+    @Html.TextBoxFor(m => m.OriginalImageUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.OriginalImageUrl)
+
+    if (Model.OriginalImageUrl != null)
+    {
+        <p><a href="@Model.OriginalImageUrl">View Image</a></p>
+    }
+
+    <legend>Links</legend>
+
+    @Html.LabelFor(m => m.RottenTomatoesApiUrl)
+    @Html.TextBoxFor(m => m.RottenTomatoesApiUrl, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.RottenTomatoesApiUrl)
 
     @Html.LabelFor(m => m.ImdbLink)
     @Html.TextBoxFor(m => m.ImdbLink, new { @class = "input-xxlarge" })
@@ -29,9 +91,40 @@
 
     @Html.HiddenFor(m => m.ID)
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button id="rtSync" type="button" class="btn pull-left">Pull Data From Rotten Tomatoes</button>
+    <button type="submit" class="btn btn-primary pull-right">Save Changes</button>
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#rtSync').click(function () {
+                if ($('#RottenTomatoesApiUrl').val()) {
+                    $.ajax({
+                        url: $.trim('@Model.AuthenticatedRottenTomatoesUrl'),
+                        dataType: "jsonp",
+                        success: RTCallback
+                    });
+                }
+                else {
+                    alert("Rotten Tomatoes API Url not set. Set this value then try again.");
+                }
+            });
+        });
+
+        function RTCallback(data) {
+            $('#Title').val(data.title);
+            $('#ReleaseYear').val(data.year);
+            $('#MpaaRating').val(data.mpaa_rating);
+            $('#Runtime').val(data.runtime);
+            $('#CriticsConsensus').val(data.critics_consensus);
+            $('#Synopsis').val(data.synopsis);
+            $('#ThumnailImageUrl').val(data.posters.thumbnail);
+            $('#ProfileImageUrl').val(data.posters.profile);
+            $('#DetailedImageUrl').val(data.posters.detailed);
+            $('#OriginalImageUrl').val(data.posters.original);
+            $('#RottenTomatoesLink').val(data.links.alternate);
+        }
+    </script>
 }

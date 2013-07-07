@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MvcPaging">
       <HintPath>..\packages\MvcPaging.2.0.4\lib\net40\MvcPaging.dll</HintPath>
@@ -204,7 +207,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RottenTomatoesHelpers.cs" />
     <Compile Include="HtmlHelpers\CommonHelpers.cs" />
+    <Compile Include="Infrastructure\AutoMapperMappings.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\DatabaseSecurityInitializer.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />

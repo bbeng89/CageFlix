@@ -38,6 +38,8 @@ namespace CageFlix
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            AutoMapperMappings.CreateMaps();
         }
     }
 }
