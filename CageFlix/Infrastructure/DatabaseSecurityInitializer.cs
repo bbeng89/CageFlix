@@ -36,7 +36,12 @@ namespace CageFlix.Infrastructure
             {
                 roles.AddUsersToRoles(new[] { "admin" }, new[] { "Admin" });
             }
+            AddMovies(context);
+        }
 
+        private void AddMovies(CageFlixContext context)
+        {
+            //TODO: seed all nic cage movies here
         }
     }
 }
