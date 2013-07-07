@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>@ViewBag.Title | CageFlix</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- styles -->
+        @Styles.Render("~/bundles/css/bootstrap")
+        @RenderSection("css", false)
+    </head>
+
+    <body>
+        <div class="container">
+            @if (TempData["message"] != null)
+            {
+                <div class="alert @TempData["message-class"]">
+                    @Html.Raw(TempData["message"])
+                </div>
+            }
+            <div class="masthead">
+                <h3 class="muted">CageFlix</h3>
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <a href="#" class="pull-left"><img src="@Url.Content("~/Assets/img/circle-face2-small.png")" /></a>
+                            <ul class="nav">
+                                <li class="divider-vertical"></li>
+                                <li class="active">@Html.ActionLink("Home", "index", "home")</li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Movie Catalog</a></li>
+                                <li><a href="#">Stats</a></li>
+                            </ul>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <p class="navbar-text pull-right">Signed in as @User.Identity.Name | @Html.ActionLink("Sign Out", "logoff", "account")</p>
+                            }
+                            else
+                            {
+                                <ul class="nav pull-right">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li class="login-li">
+                                                @using(Html.BeginForm("login", "account", FormMethod.Post, new { style = "margin-bottom:0;" }))
+                                                {
+                                                    <label>Username or Email</label>
+                                                    <input type="text" class="input-medium" name="UserName" />
+                                                    <label>Password</label>
+                                                    <input type="password" class="input-medium" name="Password" />
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" name="RememberMe" /> Remember Me
+                                                    </label>
+                                                    <button class="btn btn-block" type="submit">Sign In</button>
+                                                    <p><a href="#">Forgot your password</a></p>
+                                                    <p class="muted">Don't have an account?</p>
+                                                    <a href="@Url.Action("register", "account")">Sign up &raquo;</a>
+                                                    @Html.AntiForgeryToken()
+                                                }
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                </div><!-- /.navbar -->
+            </>
+            @RenderBody()
+            <hr>
+            <div class="footer">
+                <p>&copy; CageFlix @DateTime.Now.Year</p>
+            </div>
+        </div> <!-- /container -->
+
+        <!-- javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        @*@Scripts.Render("~/bundles/js/bootstrap")*@
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script type="text/javascript" src="@Url.Content("~/Assets/js/bootstrap/bootstrap-dropdown.js")"></script>
+        @RenderSection("scripts", required: false)
+    </body>
+</html>
