@@ -22,13 +22,22 @@ namespace CageFlix
         {
             AreaRegistration.RegisterAllAreas();
 
-            Database.SetInitializer<CageFlixContext>(null);
-            //Database.SetInitializer<CageFlixContext>(new DatabaseSecurityInitializer());
-            //using (CageFlixContext context = new CageFlixContext())
-            //{
-            //    context.Database.Initialize(true);
-            //}
-            WebSecurity.InitializeDatabaseConnection("CageFlixContext", "UserProfile", "ID", "UserName", autoCreateTables: true);
+            //ONCE DB IS INITIALIZED UNCOMMENT THE NEXT LINE
+            //Database.SetInitializer<CageFlixContext>(null);
+
+            //TO INITIALIZE DB, COMMENT OUT ABOVE LINE AND UNCOMMENT THE FOLLOWING SECTION
+            //------------------------------------------------
+            Database.SetInitializer<CageFlixContext>(new DatabaseSecurityInitializer());
+            using (CageFlixContext context = new CageFlixContext())
+            {
+                context.Database.Initialize(true);
+            }
+            //------------------------------------------------
+
+            if (!WebSecurity.Initialized)
+            {
+                WebSecurity.InitializeDatabaseConnection("CageFlixContext", "UserProfile", "ID", "UserName", autoCreateTables: true);
+            }
 
             //Use Ninject for DI
             DependencyResolver.SetResolver(new NinjectDependencyResolver());

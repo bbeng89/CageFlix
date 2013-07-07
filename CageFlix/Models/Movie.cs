@@ -60,7 +60,6 @@ namespace CageFlix.Models
 
         //External Links
 
-        [Url]
         [Display(Name = "Rotten Tomatoes API Url")]
         public string RottenTomatoesApiUrl { get; set; }
 
