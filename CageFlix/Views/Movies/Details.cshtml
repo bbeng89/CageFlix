@@ -1,0 +1,49 @@
+﻿@model CageFlix.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row-fluid">
+    <div class="span3">
+        <img src="@Model.DetailedImageUrl" alt="@Model.Title poster" />
+    </div>
+    <div class="span9">
+        <h2>@Model.Title</h2>
+        <table class="table table-condensed table-details">
+            <tbody>
+                <tr>
+                    <td>Year Released</td>
+                    <td>@Model.ReleaseYear</td>
+                </tr>
+                <tr>
+                    <td>Runtime</td>
+                    <td>@Model.Runtime minutes</td>
+                </tr>
+                <tr>
+                    <td>MPAA Rating</td>
+                    <td>@Model.MpaaRating</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Synopsis</h3>
+        @if(Model.Synopsis != null)
+        {
+            <p>@Model.Synopsis</p>
+        }
+        else
+        {
+            <p class="muted">Synopsis not available</p>
+        }
+
+        <h3>Critics Consensus</h3>
+        @if (Model.CriticsConsensus != null)
+        {
+            <p>@Model.CriticsConsensus</p>
+        }
+        else
+        {
+            <p class="muted">Critics consensus not available</p>
+        }
+    </div>
+</div>

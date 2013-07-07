@@ -22,7 +22,7 @@ namespace CageFlix.Areas.Admin.Controllers
                 movies = db.MovieRepository.Get(m => m.Title.Contains(search)).OrderBy(m => m.ReleaseYear);
             else
                 movies = db.MovieRepository.GetAll().OrderByDescending(m => m.ReleaseYear);
-            var vm = new HomeViewModel { Movies = new PagedListViewModel<Movie>(movies, page), Search = search };
+            var vm = new HomeViewModel { Movies = new CageFlix.ViewModels.PagedListViewModel<Movie>(movies, page), Search = search };
             return View(vm);
         }
 

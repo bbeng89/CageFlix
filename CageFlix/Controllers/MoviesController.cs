@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using CageFlix.Infrastructure;
 using CageFlix.DAL;
+using CageFlix.ViewModels;
+using CageFlix.Models;
 
 namespace CageFlix.Controllers
 {
@@ -13,11 +15,16 @@ namespace CageFlix.Controllers
 
         public MoviesController(IUnitOfWork iu) : base(iu) { }
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var movies = db.MovieRepository.GetAll();
+            var movies = db.MovieRepository.GetAll().OrderBy(m => m.ReleaseYear);
+            return View(new PagedListViewModel<Movie>(movies, page));
+        }
 
-            return View(movies);
+        public ActionResult Details(int id)
+        {
+            var movie = db.MovieRepository.GetByID(id);
+            return View(movie);
         }
 
     }

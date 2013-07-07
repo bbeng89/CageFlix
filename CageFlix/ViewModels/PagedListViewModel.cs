@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using MvcPaging;
 
-namespace CageFlix.Areas.Admin.ViewModels
+namespace CageFlix.ViewModels
 {
     public class PagedListViewModel<T> where T : class
     {

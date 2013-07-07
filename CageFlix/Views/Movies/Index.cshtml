@@ -1,32 +1,69 @@
-﻿@model IEnumerable<CageFlix.Models.Movie>
+﻿@model PagedListViewModel<Movie>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movie Catalog";
     ViewBag.Active = "movieCatalog";
 }
 
-<h2 class="big-asshole">All Movies @for(int i = 0; i < 106; i++) {<i class="icon-dollar"></i>}</h2>
+<h2>Pick your poison.</h2>
+<hr />
+@foreach(var movie in Model.Objects)
+{
+    <div class="row-fluid">
+        <div class="span2">
+            <img src="@movie.ProfileImageUrl" alt="@movie.Title" />
+        </div>
+        <div class="span8">
+            <h3>@movie.Title @if(movie.ReleaseYear != null){ @String.Format("({0})", movie.ReleaseYear) }</h3>
+            <h4>Synopsis</h4>
+            @if(movie.Synopsis == null)
+            {
+                <p class="muted">Synopsis not available</p>
+            }
+            else
+            {
+                <p>@movie.Synopsis</p>
+            }
+            <h4>Critics Consensus</h4>
+            @if(movie.CriticsConsensus == null)
+            {
+                <p class="muted">Critics consensus not available</p>
+            }
+            else
+            {
+                <p>@movie.CriticsConsensus</p>
+            }
+            <p class="pull-right"><a href="@Url.Action("details", "movies", new { area = "", id = movie.ID })">All the gory details &raquo;</a></p>
+        </div>
+        <div class="span2">
+            <button class="btn btn-success"><i class="icon-check"></i> Seen It</button>
+            <br /><br />
+            <div class="rating">
+                <i class="icon-star-empty"></i>
+                <i class="icon-star-empty"></i>
+                <i class="icon-star-empty"></i>
+                <i class="icon-star-empty"></i>
+                <i class="icon-star-empty"></i>
+            </div>
+        </div>
+    </div>
+    <hr />
+}
 
-@*<table class="table table-bordered table-hover table-condensed">
-    <thead>
-        <tr>
-            <th>
-                Movie Title
-            </th>
-            <th>
-                Release Date
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var movie in Model) {
-        <tr>
-            <td>
-                @movie.Title
-            </td>
-            <td>
-                @movie.ReleaseDate
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>*@
+@Html.BootstrapPager(Model)
+
+@section scripts
+{
+    <script type="text/javascript">
+        //handlers for star hover effects - there's probably a much better way of doing this...
+        $(document).ready(function () {
+            $('.rating .icon-star-empty').hover(function () {
+                $(this).removeClass().addClass('icon-star');
+                $(this).prevAll('.icon-star-empty').removeClass().addClass('icon-star');
+                $(this).nextAll('.icon-star').removeClass().addClass('icon-star-empty');
+            });
+            $('.rating').mouseleave(function () {
+                $(this).find('.icon-star').removeClass().addClass('icon-star-empty');
+            });
+        });
+    </script>
+}

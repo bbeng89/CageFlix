@@ -194,7 +194,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MoviesController.cs" />
     <Compile Include="Areas\Admin\ViewModels\HomeViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\PagedListViewModel.cs" />
+    <Compile Include="ViewModels\PagedListViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -374,6 +374,8 @@
     <Content Include="Views\Errors\NotFound.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Secret.config" />
+    <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
+    <Content Include="Views\Movies\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
