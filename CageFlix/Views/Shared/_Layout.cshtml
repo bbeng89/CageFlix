@@ -44,8 +44,13 @@
                                             </ul>
                                         </li>
                                     </ul>
+                                    <p class="navbar-text pull-right">Signed in as @User.Identity.Name | @Html.ActionLink("Sign Out", "logoff", "account")</p>
                                 }
-                                <p class="navbar-text pull-right">Signed in as @User.Identity.Name | @Html.ActionLink("Sign Out", "logoff", "account")</p>
+                                <p class="navbar-text pull-right">
+                                    Signed in as @User.Identity.Name 
+                                    <span id="userMovieCount" class="badge" title="You've seen @ViewBag.UserMovieCount Nic Cage Movies">@ViewBag.UserMovieCount</span> | 
+                                    @Html.ActionLink("Sign Out", "logoff", "account")
+                                </p>
                             }
                             else
                             {

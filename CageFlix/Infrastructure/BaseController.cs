@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CageFlix.DAL;
+using WebMatrix.WebData;
 
 namespace CageFlix.Infrastructure
 {
@@ -17,6 +18,14 @@ namespace CageFlix.Infrastructure
         public BaseController(IUnitOfWork uow)
         {
             this.db = uow;
+        }
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+
+            if (User.Identity.IsAuthenticated)
+                ViewBag.UserMovieCount = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId).UserMovies.Count;
         }
 
         public void SetAlert(string message, AlertType type)

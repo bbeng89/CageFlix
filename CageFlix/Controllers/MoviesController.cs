@@ -7,6 +7,7 @@ using CageFlix.Infrastructure;
 using CageFlix.DAL;
 using CageFlix.ViewModels;
 using CageFlix.Models;
+using WebMatrix.WebData;
 
 namespace CageFlix.Controllers
 {
@@ -17,6 +18,8 @@ namespace CageFlix.Controllers
         public ActionResult Index(int? page, string search, string order)
         {
             IQueryable<Movie> movies;
+            UserProfile user = null;
+
             if (search != null)
                 movies = db.MovieRepository.Get(m => m.Title.Contains(search));
             else
@@ -27,7 +30,10 @@ namespace CageFlix.Controllers
             else
                 movies = movies.OrderByDescending(m => m.ReleaseYear);
 
-            var vm = new MoviesViewModel { Movies = new PagedListViewModel<Movie>(movies, page), Search = search, Order = order };
+            if (User.Identity.IsAuthenticated)
+                user = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId);
+
+            var vm = new MoviesViewModel(new PagedListViewModel<Movie>(movies, page), user) { Search = search, Order = order };
             return View(vm);
         }
 

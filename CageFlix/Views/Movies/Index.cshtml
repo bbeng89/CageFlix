@@ -55,27 +55,61 @@
             <p class="pull-right"><a href="@Url.Action("details", "movies", new { area = "", id = movie.ID })">All the gory details &raquo;</a></p>
         </div>
         <div class="span2">
-            <button class="btn btn-success"><i class="icon-check"></i> Seen It</button>
-            <br /><br />
-            <div class="rating">
-                <i class="icon-star-empty"></i>
-                <i class="icon-star-empty"></i>
-                <i class="icon-star-empty"></i>
-                <i class="icon-star-empty"></i>
-                <i class="icon-star-empty"></i>
-            </div>
+            @if (User.IsInRole("Admin"))
+            {
+                <p class="muted">Login as a user to rate</p>
+            }
+            else
+            {
+                <div class="addMovieContainer">
+                    @if (Model.UserMovies.Select(um => um.MovieID).Contains(movie.ID))
+                    {
+                        <p><i class="icon-check"></i> You've seen this movie</p>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success btnAddMovie" data-movieid="@movie.ID"><i class="icon-check"></i> Seen It</button>
+                    }
+                </div>
+                <div class="rating">
+                    <i class="icon-star-empty"></i>
+                    <i class="icon-star-empty"></i>
+                    <i class="icon-star-empty"></i>
+                    <i class="icon-star-empty"></i>
+                    <i class="icon-star-empty"></i>
+                </div>
+            }
         </div>
     </div>
     <hr />
 }
 
+<div id="registerModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="registerModalLabel">Sign in or sign up first</h3>
+    </div>
+    <div class="modal-body">
+        <strong><a href="http://www.youtube.com/watch?v=U0-mGNSrnh0" target="_blank">How in the name of Zeus' BUTTHOLE</a> do you expect us to save that for you?</strong>
+        <br /><br />
+        <p>Before you can start tracking your cage flix, you've gotta @Html.ActionLink("Sign In", "login", "account", new { area = "" }, null) or @Html.ActionLink("Sign Up", "register", "account", new { area = "" }, null)</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>
+
 @Html.BootstrapPager(Model.Movies)
 
 @section scripts
 {
+    <script type="text/javascript" src="@Url.Content("~/assets/js/bootstrap/bootstrap-modal.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/assets/js/bootstrap/bootstrap-button.js")"></script>
     <script type="text/javascript">
         //handlers for star hover effects - there's probably a much better way of doing this...
         $(document).ready(function () {
+            var loggedIn = @(User.Identity.IsAuthenticated ? "true" : "false");
+
             $('.rating .icon-star-empty').hover(function () {
                 $(this).removeClass().addClass('icon-star');
                 $(this).prevAll('.icon-star-empty').removeClass().addClass('icon-star');
@@ -83,6 +117,36 @@
             });
             $('.rating').mouseleave(function () {
                 $(this).find('.icon-star').removeClass().addClass('icon-star-empty');
+            });
+
+            $('.btnAddMovie').click(function () {
+                var sender = $(this);
+                if(!loggedIn){
+                    $('#registerModal').modal();
+                }
+                else{
+                    $.ajax({
+                        url: '/user/addmovie',
+                        type: 'POST',
+                        data: {id: sender.data('movieid')},
+                        dataType: "json",
+                        beforeSend: function(){
+                            sender.addClass('disabled');
+                            sender.data('loading-text', 'Saving movie...');
+                        },
+                        success: function(){
+                            var counter = $('#userMovieCount');
+                            var count = parseInt(counter.text());
+                            var parent = sender.parent('.addMovieContainer');
+                            sender.removeClass('disabled');
+                            sender.data('loading-text', '');
+                            sender.remove();
+                            parent.append($('<p><i class="icon-check"></i> Movie added</p>'));
+                            count++;
+                            counter.text(count);
+                        }
+                    });
+                }
             });
         });
     </script>
