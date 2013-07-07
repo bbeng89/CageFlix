@@ -22,7 +22,7 @@ namespace CageFlix
         {
             AreaRegistration.RegisterAllAreas();
 
-            //ONCE DB IS INITIALIZED UNCOMMENT THE NEXT LINE
+            //ONCE DB IS INITIALIZED UNCOMMENT THE NEXT LINE AND COMMENT OUT THE FOLLOWING SECTION
             //Database.SetInitializer<CageFlixContext>(null);
 
             //TO INITIALIZE DB, COMMENT OUT ABOVE LINE AND UNCOMMENT THE FOLLOWING SECTION
