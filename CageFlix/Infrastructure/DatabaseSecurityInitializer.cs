@@ -9,7 +9,7 @@ using System.Web.Security;
 
 namespace CageFlix.Infrastructure
 {
-    public class DatabaseSecurityInitializer : CreateDatabaseIfNotExists<CageFlixContext>
+    public class DatabaseSecurityInitializer : DropCreateDatabaseAlways<CageFlixContext>
     {
         /// <summary>
         /// Initializes membership and creates admin user with username "admin" and password "password"

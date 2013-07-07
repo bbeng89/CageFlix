@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CageFlix.Models.Movie>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="big-asshole">All Movies @for(int i = 0; i < 106; i++) {<i class="icon-dollar"></i>}</h2>
+
+@*<table class="table table-bordered table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>
+                Movie Title
+            </th>
+            <th>
+                Release Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var movie in Model) {
+        <tr>
+            <td>
+                @movie.Title
+            </td>
+            <td>
+                @movie.ReleaseDate
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>*@

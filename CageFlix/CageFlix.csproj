@@ -187,6 +187,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="DAL\EfGenericRepository.cs" />
     <Compile Include="DAL\EfUnitOfWork.cs" />
     <Compile Include="DAL\IGenericRepository.cs" />
@@ -334,6 +335,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Assets\less\custom.less" />
     <Content Include="Views\Errors\NotFound.cshtml" />
+    <Content Include="Views\Movies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -357,7 +359,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>3324</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:49249/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

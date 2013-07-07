@@ -29,7 +29,7 @@
                                 <li class="divider-vertical"></li>
                                 <li class="active">@Html.ActionLink("Home", "index", "home")</li>
                                 <li><a href="#">About</a></li>
-                                <li><a href="#">Movie Catalog</a></li>
+                                <li>@Html.ActionLink("Movie Catalog", "index", "movies")</li>
                                 <li><a href="#">Stats</a></li>
                             </ul>
                             @if (User.Identity.IsAuthenticated)
