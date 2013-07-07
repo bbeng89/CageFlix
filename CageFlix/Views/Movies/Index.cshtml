@@ -1,4 +1,4 @@
-﻿@model PagedListViewModel<Movie>
+﻿@model MoviesViewModel
 @{
     ViewBag.Title = "Movie Catalog";
     ViewBag.Active = "movieCatalog";
@@ -6,7 +6,27 @@
 
 <h2>Pick your poison.</h2>
 <hr />
-@foreach(var movie in Model.Objects)
+<div class="clearfix">
+    <div class="pull-left">
+        <ul class="nav nav-pills">
+            <li class="@(Model.Order != "asc" ? "active" : "")">@Html.ActionLink("Newest First", "index", "movies", new { area = "", search = Model.Search }, null)</li>
+            <li class="@(Model.Order == "asc" ? "active" : "")">@Html.ActionLink("Oldest First", "index", "movies", new { area = "", search = Model.Search, order = "asc" }, null)</li>
+        </ul>
+    </div>
+    <div class="pull-right">
+        @using(Html.BeginForm("index", "movies", new { area = "", page = 1 }, FormMethod.Post))
+        {
+            <div class="input-append">
+                @Html.TextBoxFor(m => m.Search)
+                <button class="btn" type="submit">Search</button>
+                @Html.ActionLink("Reset", "index", "movies", new { area = "" }, new { @class = "btn" })
+            </div>
+        }
+    </div>
+</div>
+
+<hr />
+@foreach(var movie in Model.Movies.Objects)
 {
     <div class="row-fluid">
         <div class="span2">
@@ -49,7 +69,7 @@
     <hr />
 }
 
-@Html.BootstrapPager(Model)
+@Html.BootstrapPager(Model.Movies)
 
 @section scripts
 {

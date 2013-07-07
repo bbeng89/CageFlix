@@ -72,8 +72,10 @@
     @Html.TextBoxFor(m => m.NetflixLink, new { @class = "input-xxlarge" })
     @Html.ValidationMessageFor(m => m.NetflixLink)
     <br />
-    <button id="rtSync" type="button" class="btn pull-left">Pull Data From Rotten Tomatoes</button>
-    <button type="submit" class="btn btn-primary pull-right">Save Changes</button>
+    <div class="clearfix">
+        <button id="rtSync" type="button" class="btn pull-left">Pull Data From Rotten Tomatoes</button>
+        <button type="submit" class="btn btn-primary pull-right">Save Changes</button>
+    </div>
 }
 
 @section Scripts {

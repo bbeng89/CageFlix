@@ -12,13 +12,23 @@ namespace CageFlix.Controllers
 {
     public class MoviesController : BaseController
     {
-
         public MoviesController(IUnitOfWork iu) : base(iu) { }
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string search, string order)
         {
-            var movies = db.MovieRepository.GetAll().OrderBy(m => m.ReleaseYear);
-            return View(new PagedListViewModel<Movie>(movies, page));
+            IQueryable<Movie> movies;
+            if (search != null)
+                movies = db.MovieRepository.Get(m => m.Title.Contains(search));
+            else
+                movies = db.MovieRepository.GetAll();
+
+            if (order == "asc")
+                movies = movies.OrderBy(m => m.ReleaseYear);
+            else
+                movies = movies.OrderByDescending(m => m.ReleaseYear);
+
+            var vm = new MoviesViewModel { Movies = new PagedListViewModel<Movie>(movies, page), Search = search, Order = order };
+            return View(vm);
         }
 
         public ActionResult Details(int id)
