@@ -184,6 +184,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -199,6 +200,15 @@
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\DatabaseSecurityInitializer.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Migrations\201307061923083_InitialCreate.cs" />
+    <Compile Include="Migrations\201307061923083_InitialCreate.Designer.cs">
+      <DependentUpon>201307061923083_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201307070245588_AddedShitsAndGiggles.cs" />
+    <Compile Include="Migrations\201307070245588_AddedShitsAndGiggles.Designer.cs">
+      <DependentUpon>201307070245588_AddedShitsAndGiggles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\UserMovie.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -225,6 +235,7 @@
     <Content Include="Assets\js\bootstrap\bootstrap-tooltip.js" />
     <Content Include="Assets\js\bootstrap\bootstrap-transition.js" />
     <Content Include="Assets\js\bootstrap\bootstrap-typeahead.js" />
+    <Content Include="Areas\Admin\Views\Web.config" />
     <None Include="Assets\js\jquery-1.8.2.intellisense.js" />
     <Content Include="Assets\js\jquery-1.8.2.js" />
     <Content Include="Assets\js\jquery-1.8.2.min.js" />
@@ -339,9 +350,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201307061923083_InitialCreate.resx">
+      <DependentUpon>201307061923083_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201307070245588_AddedShitsAndGiggles.resx">
+      <DependentUpon>201307070245588_AddedShitsAndGiggles.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -360,6 +382,7 @@
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3324</DevelopmentServerPort>
+          <DevelopmentServerPort>55908</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:49249/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
