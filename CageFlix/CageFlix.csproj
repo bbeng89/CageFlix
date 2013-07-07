@@ -40,6 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcPaging">
+      <HintPath>..\packages\MvcPaging.2.0.4\lib\net40\MvcPaging.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -185,6 +188,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MoviesController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\PagedListViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -197,6 +204,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlHelpers\CommonHelpers.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\DatabaseSecurityInitializer.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
@@ -207,6 +215,10 @@
     <Compile Include="Migrations\201307070245588_AddedShitsAndGiggles.cs" />
     <Compile Include="Migrations\201307070245588_AddedShitsAndGiggles.Designer.cs">
       <DependentUpon>201307070245588_AddedShitsAndGiggles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201307070610355_ReleaseYearAndNetflixLink.cs" />
+    <Compile Include="Migrations\201307070610355_ReleaseYearAndNetflixLink.Designer.cs">
+      <DependentUpon>201307070610355_ReleaseYearAndNetflixLink.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Movie.cs" />
@@ -236,6 +248,11 @@
     <Content Include="Assets\js\bootstrap\bootstrap-transition.js" />
     <Content Include="Assets\js\bootstrap\bootstrap-typeahead.js" />
     <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Movies\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Movies\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Movies\Edit.cshtml" />
     <None Include="Assets\js\jquery-1.8.2.intellisense.js" />
     <Content Include="Assets\js\jquery-1.8.2.js" />
     <Content Include="Assets\js\jquery-1.8.2.min.js" />
@@ -350,9 +367,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -363,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201307070245588_AddedShitsAndGiggles.resx">
       <DependentUpon>201307070245588_AddedShitsAndGiggles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201307070610355_ReleaseYearAndNetflixLink.resx">
+      <DependentUpon>201307070610355_ReleaseYearAndNetflixLink.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -381,7 +398,6 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3324</DevelopmentServerPort>
           <DevelopmentServerPort>55908</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:49249/</IISUrl>

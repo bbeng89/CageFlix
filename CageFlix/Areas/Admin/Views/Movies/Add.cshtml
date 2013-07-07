@@ -1,0 +1,35 @@
+﻿@model Movie
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add Movie</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(m => m.Title)
+    @Html.TextBoxFor(m => m.Title, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.Title)
+
+    @Html.LabelFor(m => m.ReleaseYear)
+    @Html.TextBoxFor(m => m.ReleaseYear)
+    @Html.ValidationMessageFor(m => m.ReleaseYear)
+
+    @Html.LabelFor(m => m.ImdbLink)
+    @Html.TextBoxFor(m => m.ImdbLink, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.ImdbLink)
+
+    @Html.LabelFor(m => m.RottenTomatoesLink)
+    @Html.TextBoxFor(m => m.RottenTomatoesLink, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.RottenTomatoesLink)
+
+    @Html.LabelFor(m => m.NetflixLink)
+    @Html.TextBoxFor(m => m.NetflixLink, new { @class = "input-xxlarge" })
+    @Html.ValidationMessageFor(m => m.NetflixLink)
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

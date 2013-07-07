@@ -27,13 +27,24 @@
                             <a href="#" class="pull-left"><img src="@Url.Content("~/Assets/img/circle-face2-small.png")" /></a>
                             <ul class="nav">
                                 <li class="divider-vertical"></li>
-                                <li class="active">@Html.ActionLink("Home", "index", "home")</li>
+                                <li class="@(ViewBag.Active == "home" ? "active" : "")">@Html.ActionLink("Home", "index", "home")</li>
                                 <li><a href="#">About</a></li>
-                                <li>@Html.ActionLink("Movie Catalog", "index", "movies")</li>
+                                <li class="@(ViewBag.Active == "movieCatalog" ? "active" : "")">@Html.ActionLink("Movie Catalog", "index", "movies")</li>
                                 <li><a href="#">Stats</a></li>
                             </ul>
                             @if (User.Identity.IsAuthenticated)
                             {
+                                if (Roles.IsUserInRole("Admin"))
+                                {
+                                    <ul class="nav pull-right">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li>@Html.ActionLink("Manage Movies", "index", "movies", new { area = "admin" }, null)</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                }
                                 <p class="navbar-text pull-right">Signed in as @User.Identity.Name | @Html.ActionLink("Sign Out", "logoff", "account")</p>
                             }
                             else

@@ -19,11 +19,13 @@ namespace CageFlix.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
+        [Required]
         [MaxLength(250)]
         public string Title { get; set; }
 
-        [Display(Name = "Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        [Required]
+        [Display(Name = "Year Released")]
+        public int ReleaseYear { get; set; }
 
         [Url]
         [Display(Name = "IMDB Link")]
@@ -32,6 +34,10 @@ namespace CageFlix.Models
         [Url]
         [Display(Name = "Rotten Tomatoes Link")]
         public string RottenTomatoesLink { get; set; }
+
+        [Url]
+        [Display(Name = "Netflix Link")]
+        public string NetflixLink { get; set; }
 
         public virtual ICollection<UserMovie> UserMovies { get; set; }
     }

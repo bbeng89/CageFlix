@@ -1,0 +1,61 @@
+﻿@model HomeViewModel
+@{
+    ViewBag.Title = "Manage Movies";
+}
+
+<h2>Manage Movies</h2>
+
+<div class="clearfix">
+    <div class="pull-left">
+        <a href="@Url.Action("add", "movies")" class="btn btn-success"><i class="icon-plus"></i> Add Movie</a>
+    </div>
+    <div class="pull-right">
+        @using (Html.BeginForm("index", "movies", new { area = "admin", page = 1 }, FormMethod.Post))
+        {
+            <div class="input-append">
+                @Html.TextBoxFor(m => m.Search)
+                <button class="btn" type="submit">Search</button>
+                @Html.ActionLink("Reset", "index", "movies", null, new { @class = "btn" })
+            </div>
+        }
+    </div>
+</div>
+<table class="table table-bordered table-striped table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Release Year</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Movies.Objects.Count() == 0)
+        {
+            <tr>
+                <td colspan="4">No movies have been added yet.</td>
+            </tr>
+        }
+        @foreach (var movie in Model.Movies.Objects)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.ReleaseYear</td>
+                <td>@Html.ActionLink("Edit", "edit", "movies", new { area = "admin", id = movie.ID }, new { @class = "btn" })</td>
+                <td>
+                    @using (Html.BeginForm("delete", "movies", new { area = "admin", id = movie.ID }, FormMethod.Post, new { style = "margin:0;" }))
+                    {
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                @Model.Movies.Objects.TotalItemCount @Html.Pluralize(Model.Movies.Objects.TotalItemCount, "Movie")
+            </td>
+        </tr>
+    </tfoot>
+</table>
