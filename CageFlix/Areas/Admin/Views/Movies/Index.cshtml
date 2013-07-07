@@ -43,7 +43,7 @@
                 <td>@movie.ReleaseYear</td>
                 <td>@Html.ActionLink("Edit", "edit", "movies", new { area = "admin", id = movie.ID }, new { @class = "btn" })</td>
                 <td>
-                    @using (Html.BeginForm("delete", "movies", new { area = "admin", id = movie.ID }, FormMethod.Post, new { style = "margin:0;" }))
+                    @using (Html.BeginForm("delete", "movies", new { area = "admin", id = movie.ID }, FormMethod.Post, new { @class = "delForm", style = "margin:0;", data_movietitle = movie.Title }))
                     {
                         <button class="btn btn-danger" type="submit">Delete</button>
                     }
@@ -61,3 +61,13 @@
 </table>
 
 @Html.BootstrapPager(Model.Movies)
+
+@section scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Assets/js/appCommon.js")"></script>
+    <script>
+        $('.delForm').submit(function () {
+            return confirm('Are you sure you want to delete: ' + $(this).data('movietitle'));
+        });
+    </script>
+}

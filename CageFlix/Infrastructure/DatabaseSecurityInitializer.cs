@@ -57,7 +57,7 @@ namespace CageFlix.Infrastructure
             context.Movies.Add(new Movie { Title = "Raising Arizona", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/10205.json" });
             context.Movies.Add(new Movie { Title = "Moonstruck", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/10256.json" });
             context.Movies.Add(new Movie { Title = "Vampire's Kiss", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/14407.json" });
-            context.Movies.Add(new Movie { Title = "Never on Tuesday", RottenTomatoesApiUrl = "" });
+            context.Movies.Add(new Movie { Title = "Never on Tuesday", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/519423699.json" });
             context.Movies.Add(new Movie { Title = "Tempo di uccidere", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/771252813.json" });
             context.Movies.Add(new Movie { Title = "Fire Birds", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/11389.json" });
             context.Movies.Add(new Movie { Title = "Wild at Heart", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/13179.json" });
@@ -110,7 +110,7 @@ namespace CageFlix.Infrastructure
             context.Movies.Add(new Movie { Title = "Ghost Rider: Spirit of Vengeance", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/771201075.json" });
             context.Movies.Add(new Movie { Title = "Stolen", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/771309696.json" });
             context.Movies.Add(new Movie { Title = "The Croods", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/770818015.json" });
-            context.Movies.Add(new Movie { Title = "Joe", RottenTomatoesApiUrl = "" });
+            //context.Movies.Add(new Movie { Title = "Joe", RottenTomatoesApiUrl = "" });
             context.Movies.Add(new Movie { Title = "The Frozen Ground", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/771351267.json" });
             context.SaveChanges();
         }
