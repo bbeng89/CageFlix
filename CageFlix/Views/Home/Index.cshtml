@@ -5,8 +5,11 @@
 
 <!-- Jumbotron -->
 <div class="jumbotron">
-    <h1>REGISTERING HERE WON'T BRING BACK YOUR GODDAMN HONEY</h1>
-    @Html.ActionLink("DO IT ANYWAY", "register", "account", null, new { @class = "btn btn-large btn-success" })
+    <h1>USING THIS SITE WON'T BRING BACK YOUR GODDAMN HONEY</h1>
+    <hr />
+    <p class="text-success">But it will help you keep track of all the Nic Cage movies you've seen</p>
+    @Html.ActionLink("1. CREATE AN ACCOUNT", "register", "account", null, new { @class = "btn btn-large btn-success" }) &nbsp;
+    @Html.ActionLink("2. START WATCHING CAGE FLIX", "index", "movies", null, new { @class = "btn btn-large" })
 </div>
 <hr>
 <!-- Example row of columns -->
