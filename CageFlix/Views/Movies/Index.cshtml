@@ -33,7 +33,11 @@
             <img src="@movie.ProfileImageUrl" alt="@movie.Title" />
         </div>
         <div class="span8">
-            <h3>@movie.Title @if(movie.ReleaseYear != null){ @String.Format("({0})", movie.ReleaseYear) }</h3>
+            <h3>
+                <a href="@Url.Action("details", "movies", new { area = "", id = movie.ID })">
+                    @movie.Title @if(movie.ReleaseYear != null){ @String.Format("({0})", movie.ReleaseYear) }
+                </a>
+            </h3>
             <h4>Synopsis</h4>
             @if(movie.Synopsis == null)
             {
@@ -52,7 +56,15 @@
             {
                 <p>@movie.CriticsConsensus</p>
             }
-            <p class="pull-right"><a href="@Url.Action("details", "movies", new { area = "", id = movie.ID })">All the gory details &raquo;</a></p>
+            <div class="clearfix">
+                <div class="pull-left">
+                    @if (movie.NetflixLink != null)
+                    {
+                        <img src="@Url.Content("~/assets/img/netflix.png")" /> <a href="@movie.NetflixLink" target="_blank">Watch on Netflix</a>
+                    }
+                </div>
+                <p class="pull-right"><a href="@Url.Action("details", "movies", new { area = "", id = movie.ID })">All the gory details &raquo;</a></p>
+            </div>
         </div>
         <div class="span2">
             @if (User.IsInRole("Admin"))

@@ -11,7 +11,7 @@ namespace CageFlix.Infrastructure
     {
         public static void CreateMaps()
         {
-            AutoMapper.Mapper.CreateMap<Movie, Movie>();
+            AutoMapper.Mapper.CreateMap<Movie, Movie>().ForMember(m => m.UserMovies, opt => opt.Ignore());
         }
     }
 }

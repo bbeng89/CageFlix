@@ -20,7 +20,7 @@
                 </div>
             }
             <div class="masthead">
-                <h3 class="muted">@Html.ActionLink("CageFlix", "index", "home", new { area = "" }, null)</h3>
+                <h3>@Html.ActionLink("CageFlix", "index", "home", new { area = "" }, new { @class = "muted" })</h3>
                 <div class="navbar">
                     <div class="navbar-inner">
                         <div class="container">
@@ -46,11 +46,14 @@
                                     </ul>
                                     <p class="navbar-text pull-right">Signed in as @User.Identity.Name | @Html.ActionLink("Sign Out", "logoff", "account")</p>
                                 }
-                                <p class="navbar-text pull-right">
-                                    Signed in as @User.Identity.Name 
-                                    <span id="userMovieCount" class="badge" title="You've seen @ViewBag.UserMovieCount Nic Cage Movies">@ViewBag.UserMovieCount</span> | 
-                                    @Html.ActionLink("Sign Out", "logoff", "account")
-                                </p>
+                                else
+                                {
+                                    <p class="navbar-text pull-right">
+                                        Signed in as @User.Identity.Name 
+                                        <span id="userMovieCount" class="badge" title="You've seen @ViewBag.UserMovieCount Nic Cage Movies">@ViewBag.UserMovieCount</span> | 
+                                        @Html.ActionLink("Sign Out", "logoff", "account")
+                                    </p>
+                                }
                             }
                             else
                             {
