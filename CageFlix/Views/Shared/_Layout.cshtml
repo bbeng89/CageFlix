@@ -20,11 +20,11 @@
                 </div>
             }
             <div class="masthead">
-                <h3 class="muted">CageFlix</h3>
+                <h3 class="muted">@Html.ActionLink("CageFlix", "index", "home", new { area = "" }, null)</h3>
                 <div class="navbar">
                     <div class="navbar-inner">
                         <div class="container">
-                            <a href="#" class="pull-left"><img src="@Url.Content("~/Assets/img/circle-face2-small.png")" /></a>
+                            <a class="pull-left"><img src="@Url.Content("~/Assets/img/circle-face2-small.png")" /></a>
                             <ul class="nav">
                                 <li class="divider-vertical"></li>
                                 <li class="@(ViewBag.Active == "home" ? "active" : "")">@Html.ActionLink("Home", "index", "home", new { area = "" }, null)</li>
