@@ -28,6 +28,8 @@ namespace CageFlix.Models
         [MaxLength(8000)]
         public string Giggles { get; set; }
 
+        public DateTime DateAdded { get; set; }
+
         public virtual UserProfile UserProfile { get; set; }
 
         public virtual Movie Movie { get; set; }

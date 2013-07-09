@@ -217,23 +217,6 @@
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\DatabaseSecurityInitializer.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Migrations\201307061923083_InitialCreate.cs" />
-    <Compile Include="Migrations\201307061923083_InitialCreate.Designer.cs">
-      <DependentUpon>201307061923083_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201307070245588_AddedShitsAndGiggles.cs" />
-    <Compile Include="Migrations\201307070245588_AddedShitsAndGiggles.Designer.cs">
-      <DependentUpon>201307070245588_AddedShitsAndGiggles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201307070610355_ReleaseYearAndNetflixLink.cs" />
-    <Compile Include="Migrations\201307070610355_ReleaseYearAndNetflixLink.Designer.cs">
-      <DependentUpon>201307070610355_ReleaseYearAndNetflixLink.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201307071759136_UpdatedMovieTable.cs" />
-    <Compile Include="Migrations\201307071759136_UpdatedMovieTable.Designer.cs">
-      <DependentUpon>201307071759136_UpdatedMovieTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\UserMovie.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -241,6 +224,7 @@
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\bootstrap.css" />
@@ -398,20 +382,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201307061923083_InitialCreate.resx">
-      <DependentUpon>201307061923083_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201307070245588_AddedShitsAndGiggles.resx">
-      <DependentUpon>201307070245588_AddedShitsAndGiggles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201307070610355_ReleaseYearAndNetflixLink.resx">
-      <DependentUpon>201307070610355_ReleaseYearAndNetflixLink.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201307071759136_UpdatedMovieTable.resx">
-      <DependentUpon>201307071759136_UpdatedMovieTable.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

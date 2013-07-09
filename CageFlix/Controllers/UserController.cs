@@ -14,6 +14,11 @@ namespace CageFlix.Controllers
     {
         public UserController(IUnitOfWork uow) : base(uow) { }
 
+        public ActionResult Index(int id)
+        {
+            return View();
+        }
+
         //ajax - add a movie to a user
         public JsonResult AddMovie(int id)
         {

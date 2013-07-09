@@ -35,6 +35,11 @@ namespace CageFlix.Helpers
                     movie.Runtime = obj.runtime;
                     movie.CriticsConsensus = obj.critics_consensus;
                     movie.Synopsis = obj.synopsis;
+                    movie.ThumnailImageUrl = obj.posters.thumbnail ;
+                    movie.ProfileImageUrl = obj.posters.profile;
+                    movie.DetailedImageUrl = obj.posters.detailed;
+                    movie.OriginalImageUrl = obj.posters.original;
+                    movie.RottenTomatoesLink = obj.links.alternate;
                 }
             }
             return movie;
