@@ -48,6 +48,7 @@ namespace CageFlix.HtmlHelpers
             return helper.CageFlixRatingClass(Convert.ToDouble(cageRating));
         }
 
+        //TODO: it would be nice if this would just generate the HTML element for you - possibly pass in the element type (e.g. "h2", "p", etc)
         public static string CageFlixRatingClass(this HtmlHelper helper, double cageRating)
         {
             if (cageRating >= 3 && cageRating <= 5)
