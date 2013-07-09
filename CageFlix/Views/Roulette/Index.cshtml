@@ -3,8 +3,85 @@
     ViewBag.Active = "cageRoulette";
 }
 
-<head>
-    <h1>Cage Roulette</h1>
-</head>
-<br />
+@*TODO: isolate roulette wheel from rest of page and animate independent of mouse input*@
+<html>
+    <head>
+        <h1>Cage Roulette</h1>
+        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+        <style type='text/css'>
+            .wheel{width:350px;height:350px;background:url('Assets/img/circle-face.png') no-repeat top left;-webkit-transform:rotate(0deg);}
+        </style>
+        <script type="text/javascript">        //<![CDATA[
+            $(window).load(function () {
+                $(function () {
+
+                    var overWheel = false;
+                    var mouseDown = false;
+                    var lastMousePos = 0;
+
+                    $('.wheel').on('mouseover', function () {
+                        overWheel = true;
+                    }).on('mouseout', function () {
+                        overWheel = false;
+                    });
+
+
+                    $(document).on('mousedown', function (e) {
+                        if (overWheel) {
+                            lastMousePos = e.offsetY;
+                            mouseDown = true;
+                        }
+                    }).on('mouseup', function () {
+                        mouseDown = false;
+                    });
+
+
+                    $(document).on('mousemove', function (e) {
+                        if (overWheel && mouseDown) {
+                            handleWheel(e);
+                        }
+                    });
+
+
+                    function handleWheel(e) {
+
+                        var yPos = e.offsetY;
+                        var direction = 0;
+
+                        var deg = getRotationDegrees($('.wheel'));
+
+
+                        if (yPos < lastMousePos) { // mouse is going up, move against the clock
+                            console.log(yPos);
+                            direction = -2;
+
+                        } else { //mouse is going down, move with the clock
+
+                            direction = 2;
+
+                        }
+
+                        $('.wheel').css({ '-webkit-transform': 'rotate(' + (deg + (direction)) + 'deg)' });
+                    }
+
+                    function getRotationDegrees(obj) {
+                        var matrix = obj.css("-webkit-transform");
+                        if (matrix !== 'none') {
+                            var values = matrix.split('(')[1].split(')')[0].split(',');
+                            var a = values[0];
+                            var b = values[1];
+                            var angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
+                        } else { var angle = 0; }
+                        return angle;
+                    }
+
+                });
+            });//]]>
+        </script>
+    </head>
+    <body>
+        <div class="wheel" />
+    </body>
+    <br />
+</html>
 <img src="~/Assets/img/nic_hawking_taunt.jpg" />
