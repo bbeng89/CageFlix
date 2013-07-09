@@ -194,6 +194,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MoviesController.cs" />
     <Compile Include="Areas\Admin\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Controllers\RouletteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="ViewModels\MovieDetailsViewModel.cs" />
     <Compile Include="ViewModels\MoviesViewModel.cs" />
@@ -265,6 +266,7 @@
     <Content Include="Assets\img\circle-face2-small.png" />
     <Content Include="Assets\img\circle-face2.png" />
     <Content Include="Assets\img\netflix.png" />
+    <Content Include="Assets\img\nic_hawking.jpg" />
     <Content Include="Assets\js\bootstrap\bootstrap-affix.js" />
     <Content Include="Assets\js\bootstrap\bootstrap-alert.js" />
     <Content Include="Assets\js\bootstrap\bootstrap-button.js" />
@@ -389,6 +391,7 @@
     <Content Include="Secret.config" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Roulette\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
