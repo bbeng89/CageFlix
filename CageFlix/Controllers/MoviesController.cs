@@ -40,7 +40,13 @@ namespace CageFlix.Controllers
         public ActionResult Details(int id)
         {
             var movie = db.MovieRepository.GetByID(id);
-            return View(movie);
+            double avgRating = 0;
+            var usermovies = db.UserMovieRepository.Get(um => um.Movie.ID == movie.ID && um.Rating != 0);
+            int numUserMovies = usermovies.Count();
+            if(numUserMovies != 0)
+                avgRating = Math.Round(usermovies.Average(um => um.Rating), 1);
+            var vm = new MovieDetailsViewModel { Movie = movie, AvgRating = avgRating, NumRatings = numUserMovies };
+            return View(vm);
         }
 
     }

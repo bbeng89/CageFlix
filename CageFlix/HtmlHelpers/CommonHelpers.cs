@@ -42,5 +42,22 @@ namespace CageFlix.HtmlHelpers
                 .AlwaysAddFirstPageNumber());
             return MvcHtmlString.Create(pager.ToHtmlString());
         }
+
+        public static string CageFlixRatingClass(this HtmlHelper helper, int cageRating)
+        {
+            return helper.CageFlixRatingClass(Convert.ToDouble(cageRating));
+        }
+
+        public static string CageFlixRatingClass(this HtmlHelper helper, double cageRating)
+        {
+            if (cageRating >= 3 && cageRating <= 5)
+                return "text-success";
+            else if (cageRating > 5 && cageRating <= 8)
+                return "text-warning";
+            else if (cageRating > 8 && cageRating <= 11)
+                return "text-error";
+            else
+                return "";
+        }
     }
 }

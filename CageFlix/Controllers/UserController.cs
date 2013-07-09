@@ -14,6 +14,7 @@ namespace CageFlix.Controllers
     {
         public UserController(IUnitOfWork uow) : base(uow) { }
 
+        //ajax - add a movie to a user
         public JsonResult AddMovie(int id)
         {
             var user = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId);
@@ -23,6 +24,7 @@ namespace CageFlix.Controllers
             return Json(new { status = "success" });
         }
 
+        //ajax - add a rating to a UserMovie (and create the UserMovie if it doesn't exist)
         public JsonResult RateMovie(int id, int rating)
         {
             var user = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId);
@@ -30,7 +32,7 @@ namespace CageFlix.Controllers
             var usermovie = user.GetUserMovie(movie);
 
             if (usermovie == null)
-                user.UserMovies.Add(new UserMovie { UserProfile = user, Movie = movie });
+                user.UserMovies.Add(new UserMovie { UserProfile = user, Movie = movie, Rating = rating });
             else
                 usermovie.Rating = rating;
 

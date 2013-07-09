@@ -1,35 +1,37 @@
-﻿@model CageFlix.Models.Movie
+﻿@model MovieDetailsViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Movie.Title;
 }
 
 <div class="row-fluid">
     <div class="span3">
-        <img src="@Model.DetailedImageUrl" alt="@Model.Title poster" />
+        <img src="@Model.Movie.DetailedImageUrl" alt="@Model.Movie.Title poster" />
     </div>
     <div class="span9">
-        <h2>@Model.Title</h2>
+        <h2>@Model.Movie.Title</h2>
         <table class="table table-condensed table-details">
             <tbody>
                 <tr>
                     <td>Year Released</td>
-                    <td>@Model.ReleaseYear</td>
+                    <td>@Model.Movie.ReleaseYear</td>
                 </tr>
                 <tr>
                     <td>Runtime</td>
-                    <td>@Model.Runtime minutes</td>
+                    <td>@Model.Movie.Runtime minutes</td>
                 </tr>
                 <tr>
                     <td>MPAA Rating</td>
-                    <td>@Model.MpaaRating</td>
+                    <td>@Model.Movie.MpaaRating</td>
                 </tr>
             </tbody>
         </table>
+        <h2 class="@Html.CageFlixRatingClass(Model.AvgRating)" style="display:inline">@Model.AvgRating</h2> &nbsp; 
+        <span class="muted"><abbr title="On a scale of 3 to 11, how bat-shit crazy Nic Cage is in this movie">Average CageFlix rating</abbr></span> <span class="muted">(@Model.NumRatings @Html.Pluralize(Model.NumRatings, "rating"))</span>
         <h3>Synopsis</h3>
-        @if(Model.Synopsis != null)
+        @if (Model.Movie.Synopsis != null)
         {
-            <p>@Model.Synopsis</p>
+            <p>@Model.Movie.Synopsis</p>
         }
         else
         {
@@ -37,9 +39,9 @@
         }
 
         <h3>Critics Consensus</h3>
-        @if (Model.CriticsConsensus != null)
+        @if (Model.Movie.CriticsConsensus != null)
         {
-            <p>@Model.CriticsConsensus</p>
+            <p>@Model.Movie.CriticsConsensus</p>
         }
         else
         {
