@@ -4,6 +4,10 @@
     ViewBag.Active = "movieCatalog";
 }
 
+@section css
+{
+    <link rel="stylesheet" href="@Url.Content("~/Assets/css/jquery-ui/jquery-ui-1.10.3.custom.min.css")" />
+}
 <h2>Pick your poison.</h2>
 <hr />
 <div class="clearfix">
@@ -26,11 +30,24 @@
 </div>
 
 <hr />
-@foreach(var movie in Model.Movies.Objects)
+@foreach (var movie in Model.Movies.Objects)
 {
     <div class="row-fluid">
         <div class="span2">
             <img src="@movie.ProfileImageUrl" alt="@movie.Title" />
+            @if(!User.IsInRole("Admin"))
+            {
+                <div class="addMovieContainer">
+                    @if (Model.UserHasSeenMovie(movie))
+                    {
+                        <p class="text-success"><i class="icon-check"></i> You've seen this movie</p>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success btnAddMovie" data-movieid="@movie.ID"><i class="icon-check"></i> Seen It</button>
+                    }
+                </div>
+            }
         </div>
         <div class="span8">
             <h3>
@@ -73,23 +90,18 @@
             }
             else
             {
-                <div class="addMovieContainer">
-                    @if (Model.UserMovies != null && Model.UserMovies.Select(um => um.MovieID).Contains(movie.ID))
-                    {
-                        <p><i class="icon-check"></i> You've seen this movie</p>
-                    }
-                    else
-                    {
-                        <button class="btn btn-success btnAddMovie" data-movieid="@movie.ID"><i class="icon-check"></i> Seen It</button>
-                    }
-                </div>
-                <div class="rating">
-                    <i class="icon-star-empty"></i>
-                    <i class="icon-star-empty"></i>
-                    <i class="icon-star-empty"></i>
-                    <i class="icon-star-empty"></i>
-                    <i class="icon-star-empty"></i>
-                </div>
+                int userRating = Model.GetUserRating(movie); 
+                <p class="muted">Your Rating:</p>
+                <p class="text-center">How bat-shit crazy was Nic Cage?</p>
+                <div class="rating" data-movieid="@movie.ID" data-rating="@userRating"></div>
+                if (userRating != 0)
+                {
+                    <h2 class="text-center user-rating">@userRating</h2>
+                }
+                else
+                {
+                    <h2 class="muted text-center user-rating">Not rated</h2>
+                }
             }
         </div>
     </div>
@@ -115,6 +127,7 @@
 
 @section scripts
 {
+    <script type="text/javascript" src="@Url.Content("~/Assets/js/jquery-ui-1.10.3.custom.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/assets/js/bootstrap/bootstrap-modal.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/assets/js/bootstrap/bootstrap-button.js")"></script>
     <script type="text/javascript">
@@ -122,13 +135,33 @@
         $(document).ready(function () {
             var loggedIn = @(User.Identity.IsAuthenticated ? "true" : "false");
 
-            $('.rating .icon-star-empty').hover(function () {
-                $(this).removeClass().addClass('icon-star');
-                $(this).prevAll('.icon-star-empty').removeClass().addClass('icon-star');
-                $(this).nextAll('.icon-star').removeClass().addClass('icon-star-empty');
-            });
-            $('.rating').mouseleave(function () {
-                $(this).find('.icon-star').removeClass().addClass('icon-star-empty');
+            $(".rating").each(function(){
+                $(this).slider({
+                    value: parseInt($(this).data('rating')),
+                    min: 3,
+                    max: 11,
+                    step: 1,
+                    slide: function( event, ui ) {
+                        $(this).next('.user-rating').text(ui.value).removeClass('muted');
+                    },
+                    stop: function(event, ui){
+                        var userRating = $(this).next('.user-rating');
+                        var movieId = $(this).data('movieid');
+                        $.ajax({
+                            url: '/user/ratemovie',
+                            type: 'POST',
+                            data: {id: movieId, rating: ui.value},
+                            dataType: "json",
+                            beforeSend: function(){
+                                userRating.html('<i class="icon-spinner icon-spin"></i>');
+                            },
+                            success: function(){
+                                userRating.text(ui.value).removeClass('muted');
+                                console.log($(this).closest('.addMovieContainer'));
+                            }
+                        });
+                    }
+                });
             });
 
             $('.btnAddMovie').click(function () {

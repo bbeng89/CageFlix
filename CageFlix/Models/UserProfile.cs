@@ -25,5 +25,10 @@ namespace CageFlix.Models
         public string Email { get; set; }
 
         public virtual ICollection<UserMovie> UserMovies { get; set; }
+
+        public UserMovie GetUserMovie(Movie movie)
+        {
+            return this.UserMovies.SingleOrDefault(um => um.Movie == movie);
+        }
     }
 }

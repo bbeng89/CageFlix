@@ -23,5 +23,19 @@ namespace CageFlix.Controllers
             return Json(new { status = "success" });
         }
 
+        public JsonResult RateMovie(int id, int rating)
+        {
+            var user = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId);
+            var movie = db.MovieRepository.GetByID(id);
+            var usermovie = user.GetUserMovie(movie);
+
+            if (usermovie == null)
+                user.UserMovies.Add(new UserMovie { UserProfile = user, Movie = movie });
+            else
+                usermovie.Rating = rating;
+
+            db.Save();
+            return Json(new { status = "success" });
+        }
     }
 }

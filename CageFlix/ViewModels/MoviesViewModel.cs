@@ -23,5 +23,19 @@ namespace CageFlix.ViewModels
                 this.UserMovies = user.UserMovies.ToList();
             }
         }
+
+        // custom methods
+        public bool UserHasSeenMovie(Movie movie)
+        {
+            return this.UserMovies != null && this.UserMovies.Select(um => um.MovieID).Contains(movie.ID);
+        }
+
+        public int GetUserRating(Movie movie)
+        {
+            if (this.UserHasSeenMovie(movie))
+                return this.UserMovies.SingleOrDefault(um => um.Movie == movie).Rating;
+
+            return 0;
+        }
     }
 }
