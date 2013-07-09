@@ -91,8 +91,7 @@
             else
             {
                 int userRating = Model.GetUserRating(movie); 
-                <p class="muted">Your Rating:</p>
-                <p class="text-center">How bat-shit crazy was Nic Cage?</p>
+                <p><abbr title="On a scale of 3 to 11, how batshit crazy Nic Cage is in this movie">Your CageFlix rating</abbr></p>
                 <div class="rating" data-movieid="@movie.ID" data-rating="@userRating"></div>
                 if (userRating != 0)
                 {
