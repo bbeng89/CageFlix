@@ -34,13 +34,12 @@ namespace CageFlix.HtmlHelpers
             }
         }
 
-        public static MvcHtmlString BootstrapPager<T>(this HtmlHelper helper, PagedListViewModel<T> model) where T : class
+        public static IHtmlString BootstrapPager<T>(this HtmlHelper helper, PagedListViewModel<T> model) where T : class
         {
-            var pager = helper.Pager(model.Objects.PageSize, model.Objects.PageNumber, model.Objects.TotalItemCount).Options(o => o
+            return helper.Pager(model.Objects.PageSize, model.Objects.PageNumber, model.Objects.TotalItemCount).Options(o => o
                 .DisplayTemplate("BootstrapPagination")
                 .MaxNrOfPages(5)
                 .AlwaysAddFirstPageNumber());
-            return MvcHtmlString.Create(pager.ToHtmlString());
         }
 
         public static string CageFlixRatingClass(this HtmlHelper helper, int cageRating)
