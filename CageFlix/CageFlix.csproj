@@ -266,7 +266,7 @@
     <Content Include="Assets\img\circle-face2-small.png" />
     <Content Include="Assets\img\circle-face2.png" />
     <Content Include="Assets\img\netflix.png" />
-    <Content Include="Assets\img\nic_hawking.jpg" />
+    <Content Include="Assets\img\nic_hawking_taunt.jpg" />
     <Content Include="Assets\js\bootstrap\bootstrap-affix.js" />
     <Content Include="Assets\js\bootstrap\bootstrap-alert.js" />
     <Content Include="Assets\js\bootstrap\bootstrap-button.js" />
