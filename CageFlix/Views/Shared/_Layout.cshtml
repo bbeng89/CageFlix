@@ -50,7 +50,7 @@
                                 else
                                 {
                                     <p class="navbar-text pull-right">
-                                        Signed in as @User.Identity.Name 
+                                        Signed in as @Html.ActionLink(User.Identity.Name, "index", "user", new { id = WebMatrix.WebData.WebSecurity.CurrentUserId }, null)
                                         <span id="userMovieCount" class="badge" title="You've seen @ViewBag.UserMovieCount Nic Cage Movies">@ViewBag.UserMovieCount</span> | 
                                         @Html.ActionLink("Sign Out", "logoff", "account")
                                     </p>

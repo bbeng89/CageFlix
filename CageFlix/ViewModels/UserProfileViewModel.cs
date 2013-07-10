@@ -15,7 +15,7 @@ namespace CageFlix.ViewModels
         public UserProfileViewModel(UserProfile user)
         {
             this.User = user;
-            this.RecentUserMovies = this.User.UserMovies.Take(5).ToList();
+            this.RecentUserMovies = this.User.UserMovies.OrderByDescending(um => um.DateAdded).Take(5).ToList();
         }
     }
 }

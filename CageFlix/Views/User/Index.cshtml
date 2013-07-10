@@ -1,0 +1,57 @@
+﻿@model UserProfileViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Model.User.UserName</h2>
+
+<h3>@Model.User.CageFlixScore Cage Flix Seen</h3>
+
+<legend>Recent Flix</legend>
+
+@if (Model.RecentUserMovies.Count == 0)
+{
+    <p class="muted"><a href="http://www.youtube.com/watch?v=K4Fl57Nxiiw">Well hooray for the sounds of fucking silence.</a> @Model.User.UserName has not watch any CageFlix.</p>
+}
+else
+{
+    //this needs to be optimized - currently a query will be run for each movie in this loop. need to prefetch using Include()
+    foreach (var usermovie in Model.RecentUserMovies)
+    {
+        <div class="row-fluid">
+            <div class="span2">
+                <p>@usermovie.DateAdded.ToString("MM/dd/yyyy")</p>
+                <img src="@usermovie.Movie.ProfileImageUrl" alt="@usermovie.Movie.Title" />
+            </div>
+            <div class="span8">
+                <h4>Shits</h4>
+                @if(usermovie.Shits == null)
+                {
+                    <p class="muted">Apparently nothing in this movie made @Model.User.UserName shit.</p>
+                }
+                else
+                {
+                    <p>@usermovie.Shits</p>
+                }
+                <h4>Giggles</h4>
+                @if(usermovie.Giggles == null)
+                {
+                    <p class="muted">Apparently nothing in this movie made @Model.User.UserName giggle.</p>
+                }
+                else
+                {
+                    <p>@usermovie.Giggles</p>
+                }
+            </div>
+            <div class="span2">
+                @if(usermovie.Rating != 0)
+                {
+                    <p class="muted">@Model.User.UserName rated this movie:</p>
+                    <h2>@usermovie.Rating</h2>
+                }
+            </div>
+        </div>
+        <hr />
+    }
+    <p><a href="#">View full CageFlix history &raquo;</a></p>
+}

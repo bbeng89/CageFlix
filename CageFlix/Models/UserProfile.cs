@@ -30,5 +30,7 @@ namespace CageFlix.Models
         {
             return this.UserMovies.SingleOrDefault(um => um.Movie == movie);
         }
+
+        public int CageFlixScore { get { return this.UserMovies.Count; } }
     }
 }

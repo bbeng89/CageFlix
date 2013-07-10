@@ -7,6 +7,7 @@ using CageFlix.DAL;
 using CageFlix.Infrastructure;
 using WebMatrix.WebData;
 using CageFlix.Models;
+using CageFlix.ViewModels;
 
 namespace CageFlix.Controllers
 {
@@ -14,9 +15,11 @@ namespace CageFlix.Controllers
     {
         public UserController(IUnitOfWork uow) : base(uow) { }
 
+        //user profile for user with id
         public ActionResult Index(int id)
         {
-            return View();
+            var user = db.UserProfileRepository.GetByID(id);
+            return View(new UserProfileViewModel(user));
         }
 
         //ajax - add a movie to a user
@@ -24,7 +27,7 @@ namespace CageFlix.Controllers
         {
             var user = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId);
             var movie = db.MovieRepository.GetByID(id);
-            user.UserMovies.Add(new UserMovie { UserProfile = user, Movie = movie });
+            user.UserMovies.Add(new UserMovie { UserProfile = user, Movie = movie, DateAdded = DateTime.Now });
             db.Save();
             return Json(new { status = "success" });
         }
@@ -37,7 +40,7 @@ namespace CageFlix.Controllers
             var usermovie = user.GetUserMovie(movie);
 
             if (usermovie == null)
-                user.UserMovies.Add(new UserMovie { UserProfile = user, Movie = movie, Rating = rating });
+                user.UserMovies.Add(new UserMovie { UserProfile = user, Movie = movie, Rating = rating, DateAdded = DateTime.Now });
             else
                 usermovie.Rating = rating;
 
