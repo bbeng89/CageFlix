@@ -29,7 +29,7 @@
         <h2 class="@Html.CageFlixRatingClass(Model.AvgRating)" style="display:inline">@Model.AvgRating</h2> &nbsp; 
         <span class="muted"><abbr title="On a scale of 3 to 11, how batshit crazy Nic Cage is in this movie">Average CageFlix rating</abbr></span> <span class="muted">(@Model.NumRatings @Html.Pluralize(Model.NumRatings, "rating"))</span>
         <h3>Synopsis</h3>
-        @if (Model.Movie.Synopsis != null)
+        @if (!String.IsNullOrEmpty(Model.Movie.Synopsis))
         {
             <p>@Model.Movie.Synopsis</p>
         }
@@ -39,7 +39,7 @@
         }
 
         <h3>Critics Consensus</h3>
-        @if (Model.Movie.CriticsConsensus != null)
+        @if (!String.IsNullOrEmpty(Model.Movie.CriticsConsensus))
         {
             <p>@Model.Movie.CriticsConsensus</p>
         }

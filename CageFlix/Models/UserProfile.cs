@@ -21,8 +21,7 @@ namespace CageFlix.Models
 
         public string UserName { get; set; }
 
-        [EmailAddress]
-        public string Email { get; set; }
+        public DateTime JoinDate { get; set; }
 
         public virtual ICollection<UserMovie> UserMovies { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using CageFlix.Models;
+﻿using CageFlix.Helpers;
+using CageFlix.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace CageFlix.ViewModels
         public string Order { get; set; }
         public PagedListViewModel<Movie> Movies { get; private set; }
         public List<UserMovie> UserMovies { get; private set; }
+        public CageFlixHelpers Helpers { get; private set; }
 
-        public MoviesViewModel(PagedListViewModel<Movie> movies, UserProfile user = null)
+        public MoviesViewModel(PagedListViewModel<Movie> movies, CageFlixHelpers helpers, UserProfile user = null)
         {
             this.Movies = movies;
+            this.Helpers = helpers;
 
             if (user != null)
             {

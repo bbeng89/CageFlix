@@ -196,6 +196,7 @@
     <Compile Include="Areas\Admin\ViewModels\HomeViewModel.cs" />
     <Compile Include="Controllers\RouletteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Helpers\CageFlixHelpers.cs" />
     <Compile Include="ViewModels\MovieDetailsViewModel.cs" />
     <Compile Include="ViewModels\MoviesViewModel.cs" />
     <Compile Include="ViewModels\PagedListViewModel.cs" />

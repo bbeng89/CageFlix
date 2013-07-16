@@ -11,10 +11,12 @@
 <h2>Pick your poison.</h2>
 <hr />
 <div class="clearfix">
+    <p class="muted">Sort By:</p>
     <div class="pull-left">
         <ul class="nav nav-pills">
-            <li class="@(Model.Order != "asc" ? "active" : "")">@Html.ActionLink("Newest First", "index", "movies", new { area = "", search = Model.Search }, null)</li>
-            <li class="@(Model.Order == "asc" ? "active" : "")">@Html.ActionLink("Oldest First", "index", "movies", new { area = "", search = Model.Search, order = "asc" }, null)</li>
+            <li class="@(String.IsNullOrEmpty(Model.Order) || Model.Order == "desc" ? "active" : "")">@Html.ActionLink("Newest", "index", "movies", new { area = "", search = Model.Search, order = "desc" }, null)</li>
+            <li class="@(Model.Order == "asc" ? "active" : "")">@Html.ActionLink("Oldest", "index", "movies", new { area = "", search = Model.Search, order = "asc" }, null)</li>
+            <li class="@(Model.Order == "netflix" ? "active" : "")">@Html.ActionLink("On Netflix", "index", "movies", new { area = "", search = Model.Search, order = "netflix" }, null)</li>
         </ul>
     </div>
     <div class="pull-right">
@@ -56,7 +58,7 @@
                 </a>
             </h3>
             <h4>Synopsis</h4>
-            @if(movie.Synopsis == null)
+            @if(String.IsNullOrEmpty(movie.Synopsis))
             {
                 <p class="muted">Synopsis not available</p>
             }
@@ -65,7 +67,7 @@
                 <p>@movie.Synopsis</p>
             }
             <h4>Critics Consensus</h4>
-            @if(movie.CriticsConsensus == null)
+            @if(String.IsNullOrEmpty(movie.CriticsConsensus))
             {
                 <p class="muted">Critics consensus not available</p>
             }
@@ -84,14 +86,14 @@
             </div>
         </div>
         <div class="span2">
-            @if (User.IsInRole("Admin"))
+            @if (!User.Identity.IsAuthenticated || User.IsInRole("Admin"))
             {
-                <p class="muted">Login as a user to rate</p>
+                <p class="text-center muted">@Html.ActionLink("Login to rate", "login", "account", new { area = "" }, null)</p>
             }
             else
             {
                 int userRating = Model.GetUserRating(movie); 
-                <p><abbr title="On a scale of 3 to 11, how batshit crazy Nic Cage is in this movie">Your CageFlix rating</abbr></p>
+                <p class="text-center"><abbr title="On a scale of 3 to 11, how batshit crazy Nic Cage is in this movie">Your CageFlix rating</abbr></p>
                 <div class="rating" data-movieid="@movie.ID" data-rating="@userRating"></div>
                 if (userRating != 0)
                 {
@@ -101,6 +103,17 @@
                 {
                     <h2 class="muted text-center user-rating">Not rated</h2>
                 }
+                <hr />
+            }
+            <p class="text-center"><abbr title="On a scale of 3 to 11, how batshit crazy Nic Cage is in this movie">Avg. CageFlix rating</abbr></p>
+            @{var avgRating = Model.Helpers.GetAvgCageFlixScore(movie);}
+            @if (avgRating != 0)
+            {
+                <h2 class="text-center user-rating">@avgRating</h2>
+            }
+            else
+            {
+                <p class="muted text-center user-rating">Not Rated</p>
             }
         </div>
     </div>
@@ -122,7 +135,7 @@
     </div>
 </div>
 
-@Html.BootstrapPager(Model.Movies)
+@Html.BootstrapPager(Model.Movies, new { search = Model.Search, order = Model.Order })
 
 @section scripts
 {

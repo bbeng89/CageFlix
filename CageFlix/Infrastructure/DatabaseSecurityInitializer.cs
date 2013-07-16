@@ -37,7 +37,7 @@ namespace CageFlix.Infrastructure
             }
             if (membership.GetUser("admin", false) == null)
             {
-                membership.CreateUserAndAccount("admin", "password", new Dictionary<string,object>{ {"Email", "admin@cageflix.com" } });
+                membership.CreateUserAndAccount("admin", "password", new Dictionary<string,object>{ {"JoinDate", DateTime.Now } });
             }
             if (!roles.GetRolesForUser("admin").Contains("Admin"))
             {

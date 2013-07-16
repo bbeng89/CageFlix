@@ -34,11 +34,12 @@ namespace CageFlix.HtmlHelpers
             }
         }
 
-        public static IHtmlString BootstrapPager<T>(this HtmlHelper helper, PagedListViewModel<T> model) where T : class
+        public static IHtmlString BootstrapPager<T>(this HtmlHelper helper, PagedListViewModel<T> model, object routeValues = null) where T : class
         {
             return helper.Pager(model.Objects.PageSize, model.Objects.PageNumber, model.Objects.TotalItemCount).Options(o => o
                 .DisplayTemplate("BootstrapPagination")
                 .MaxNrOfPages(5)
+                .RouteValues(routeValues)
                 .AlwaysAddFirstPageNumber());
         }
 

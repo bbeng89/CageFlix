@@ -1,4 +1,5 @@
-﻿using CageFlix.Models;
+﻿using CageFlix.Helpers;
+using CageFlix.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,15 @@ namespace CageFlix.ViewModels
         public double AvgRating { get; set; }
 
         public IEnumerable<UserMovie> RecentShitsAndGiggles { get; set; } //TODO
+
+        public CageFlixHelpers Helpers { get; set; }
+
+        public MovieDetailsViewModel(Movie movie, CageFlixHelpers helpers)
+        {
+            this.Movie = movie;
+            this.Helpers = helpers;
+            this.NumRatings = movie.UserMovies.Count();
+            this.AvgRating = helpers.GetAvgCageFlixScore(movie);
+        }
     }
 }

@@ -5,13 +5,15 @@
 
 <h2>@Model.User.UserName</h2>
 
+<p>Member since @Model.User.JoinDate.ToString("MM/dd/yyyy")</p>
+
 <h3>@Model.User.CageFlixScore Cage Flix Seen</h3>
 
 <legend>Recent Flix</legend>
 
 @if (Model.RecentUserMovies.Count == 0)
 {
-    <p class="muted"><a href="http://www.youtube.com/watch?v=K4Fl57Nxiiw">Well hooray for the sounds of fucking silence.</a> @Model.User.UserName has not watch any CageFlix.</p>
+    <p class="muted"><a href="http://www.youtube.com/watch?v=K4Fl57Nxiiw">Well hooray for the sounds of fucking silence.</a> @Model.User.UserName has not watched any CageFlix.</p>
 }
 else
 {

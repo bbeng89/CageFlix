@@ -79,7 +79,7 @@ namespace CageFlix.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, propertyValues: new { Email = model.Email });
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { JoinDate = DateTime.Now });
                     WebSecurity.Login(model.UserName, model.Password);
                     this.SetAlert("<strong><a href=\"http://www.youtube.com/watch?v=3K7GPKt9vIk&list=PLE67C6AEE86200F0C\" target=\"_blank\">WELL VIVE LA FUCKING FRANCE, MAN!</a></strong> You just signed up.", AlertType.Success);
                     return RedirectToAction("Index", "Home");
