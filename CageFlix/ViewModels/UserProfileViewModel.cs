@@ -6,16 +6,14 @@ using CageFlix.Models;
 
 namespace CageFlix.ViewModels
 {
-    public class UserProfileViewModel
+    public class UserProfileViewModel : PagedListViewModel<UserMovie>
     {
         public UserProfile User { get; private set; }
 
-        public List<UserMovie> RecentUserMovies { get; private set; }
-
-        public UserProfileViewModel(UserProfile user)
+        public UserProfileViewModel(UserProfile user, IQueryable<UserMovie> movies, int? page) 
+            : base(movies, page)
         {
             this.User = user;
-            this.RecentUserMovies = this.User.UserMovies.OrderByDescending(um => um.DateAdded).Take(5).ToList();
         }
     }
 }

@@ -16,10 +16,11 @@ namespace CageFlix.Controllers
         public UserController(IUnitOfWork uow) : base(uow) { }
 
         //user profile for user with id
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, int? page)
         {
             var user = db.UserProfileRepository.GetByID(id);
-            return View(new UserProfileViewModel(user));
+            var movies = user.UserMovies.OrderByDescending(um => um.DateAdded).AsQueryable();
+            return View(new UserProfileViewModel(user, movies, page));
         }
 
         //ajax - add a movie to a user

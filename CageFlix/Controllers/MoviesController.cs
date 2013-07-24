@@ -16,16 +16,31 @@ namespace CageFlix.Controllers
     {
         public MoviesController(IUnitOfWork iu) : base(iu) { }
 
-        public ActionResult Index(int? page, string search, string order)
+        public ActionResult Index(int? page, string search, string order, string filter)
         {
-            IQueryable<Movie> movies;
+            IQueryable<Movie> movies = db.MovieRepository.GetAll();
             UserProfile user = null;
 
-            if (search != null)
-                movies = db.MovieRepository.Get(m => m.Title.Contains(search));
-            else
-                movies = db.MovieRepository.GetAll();
+            if (User.Identity.IsAuthenticated)
+                user = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId);
 
+            //FILTER
+            if (user != null && filter == "notseen")
+            {
+                var seenIds = user.UserMovies.Select(um => um.MovieID);
+                movies = movies.Where(m => !seenIds.Contains(m.ID));
+            }
+            else if (user != null && filter == "seen")
+            {
+                var seenIds = user.UserMovies.Select(um => um.MovieID);
+                movies = movies.Where(m => seenIds.Contains(m.ID));
+            }
+
+            //SEARCH
+            if (search != null)
+                movies = movies.Where(m => m.Title.Contains(search));
+
+            //ORDER
             if (order == "asc")
                 movies = movies.OrderBy(m => m.ReleaseYear);
             else if (order == "netflix")
@@ -33,11 +48,8 @@ namespace CageFlix.Controllers
             else
                 movies = movies.OrderByDescending(m => m.ReleaseYear);
 
-            if (User.Identity.IsAuthenticated)
-                user = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId);
-
             var helper = new CageFlixHelpers(db);
-            var vm = new MoviesViewModel(new PagedListViewModel<Movie>(movies, page), helper, user) { Search = search, Order = order };
+            var vm = new MoviesViewModel(new PagedListViewModel<Movie>(movies, page), helper, user) { Search = search, Order = order, Filter = filter };
             return View(vm);
         }
 

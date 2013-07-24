@@ -9,16 +9,16 @@
 
 <h3>@Model.User.CageFlixScore Cage Flix Seen</h3>
 
-<legend>Recent Flix</legend>
+<hr />
 
-@if (Model.RecentUserMovies.Count == 0)
+@if (Model.Objects.TotalItemCount == 0)
 {
     <p class="muted"><a href="http://www.youtube.com/watch?v=K4Fl57Nxiiw">Well hooray for the sounds of fucking silence.</a> @Model.User.UserName has not watched any CageFlix.</p>
 }
 else
 {
     //this needs to be optimized - currently a query will be run for each movie in this loop. need to prefetch using Include()
-    foreach (var usermovie in Model.RecentUserMovies)
+    foreach (var usermovie in Model.Objects)
     {
         <div class="row-fluid">
             <div class="span2">
@@ -55,5 +55,5 @@ else
         </div>
         <hr />
     }
-    <p><a href="#">View full CageFlix history &raquo;</a></p>
+    @Html.BootstrapPager(Model, new { id = Model.User.ID })
 }

@@ -11,16 +11,27 @@
 <h2>Pick your poison.</h2>
 <hr />
 <div class="clearfix">
-    <p class="muted">Sort By:</p>
     <div class="pull-left">
+        <p class="muted">Sort By:</p>
         <ul class="nav nav-pills">
-            <li class="@(String.IsNullOrEmpty(Model.Order) || Model.Order == "desc" ? "active" : "")">@Html.ActionLink("Newest", "index", "movies", new { area = "", search = Model.Search, order = "desc" }, null)</li>
-            <li class="@(Model.Order == "asc" ? "active" : "")">@Html.ActionLink("Oldest", "index", "movies", new { area = "", search = Model.Search, order = "asc" }, null)</li>
-            <li class="@(Model.Order == "netflix" ? "active" : "")">@Html.ActionLink("On Netflix", "index", "movies", new { area = "", search = Model.Search, order = "netflix" }, null)</li>
+            <li class="@(String.IsNullOrEmpty(Model.Order) || Model.Order == "desc" ? "active" : "")">@Html.ActionLink("Newest", "index", "movies", new { area = "", search = Model.Search, order = "desc", filter = Model.Filter }, null)</li>
+            <li class="@(Model.Order == "asc" ? "active" : "")">@Html.ActionLink("Oldest", "index", "movies", new { area = "", search = Model.Search, order = "asc", filter = Model.Filter }, null)</li>
+            <li class="@(Model.Order == "netflix" ? "active" : "")">@Html.ActionLink("On Netflix", "index", "movies", new { area = "", search = Model.Search, order = "netflix", filter = Model.Filter }, null)</li>
         </ul>
     </div>
+    @if(User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
+    {
+        <div class="pull-left">
+            <p class="muted">Filter By:</p>
+            <ul class="nav nav-pills">
+                <li class="@(String.IsNullOrEmpty(Model.Filter) ? "active" : "")">@Html.ActionLink("None", "index", "movies", new { area = "", search = Model.Search, order = Model.Order }, null)</li>
+                <li class="@(Model.Filter == "seen" ? "active" : "")">@Html.ActionLink("Seen", "index", "movies", new { area = "", search = Model.Search, order = Model.Order, filter = "seen" }, null)</li>
+                <li class="@(Model.Filter == "notseen" ? "active" : "")">@Html.ActionLink("Not Seen", "index", "movies", new { area = "", search = Model.Search, order = Model.Order, filter = "notseen" }, null)</li>
+            </ul>
+        </div>
+    }
     <div class="pull-right">
-        @using(Html.BeginForm("index", "movies", new { area = "", page = 1 }, FormMethod.Post))
+        @using (Html.BeginForm("index", "movies", new { area = "", page = 1 }, FormMethod.Post, new { style = "margin-top: 30px;" }))
         {
             <div class="input-append">
                 @Html.TextBoxFor(m => m.Search)
@@ -32,6 +43,10 @@
 </div>
 
 <hr />
+@if(Model.Movies.Objects.TotalItemCount == 0)
+{
+    <p class="muted">No Cage Flix found</p>
+}
 @foreach (var movie in Model.Movies.Objects)
 {
     <div class="row-fluid">
@@ -135,7 +150,7 @@
     </div>
 </div>
 
-@Html.BootstrapPager(Model.Movies, new { search = Model.Search, order = Model.Order })
+@Html.BootstrapPager(Model.Movies, new { search = Model.Search, order = Model.Order, filter = Model.Filter })
 
 @section scripts
 {
@@ -143,7 +158,6 @@
     <script type="text/javascript" src="@Url.Content("~/assets/js/bootstrap/bootstrap-modal.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/assets/js/bootstrap/bootstrap-button.js")"></script>
     <script type="text/javascript">
-        //handlers for star hover effects - there's probably a much better way of doing this...
         $(document).ready(function () {
             var loggedIn = @(User.Identity.IsAuthenticated ? "true" : "false");
 

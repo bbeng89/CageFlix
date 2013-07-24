@@ -12,6 +12,7 @@ namespace CageFlix.ViewModels
     {
         public string Search { get; set; }
         public string Order { get; set; }
+        public string Filter { get; set; }
         public PagedListViewModel<Movie> Movies { get; private set; }
         public List<UserMovie> UserMovies { get; private set; }
         public CageFlixHelpers Helpers { get; private set; }

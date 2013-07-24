@@ -10,7 +10,7 @@ namespace CageFlix.ViewModels
     {
         private IQueryable<T> _objects;
 
-        public int PageSize { get { return 25; } }
+        public int PageSize { get { return 20; } }
 
         public int? CurrentPage { get; set; }
 
