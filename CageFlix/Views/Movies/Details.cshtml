@@ -49,3 +49,45 @@
         }
     </div>
 </div>
+<h3>User Reviews</h3>
+@if(Model.UserHasSeenMovie && !Model.UserHasReviewedMovie)
+{
+    using(Html.BeginForm())
+    {
+        <div class="row-fluid">
+            <div class="span12">
+                <p id="shits-n-gigs">What about this movie made you shit and what made you giggle?</p>
+                <div class="row-fluid">
+                    <div class="span6">
+                        @Html.TextArea("Shits", new { @class = "span12", rows = "4", placeholder = "What made you shit?" })
+                    </div>
+                    <div class="span6">
+                        @Html.TextArea("Giggles", new { @class = "span12", rows = "4", placeholder = "What made you giggle?" })
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+                @Html.Hidden("MovieID", Model.Movie.ID)
+            </div>
+        </div>
+    }
+}
+else if (!Model.UserHasSeenMovie)
+{
+    <p>You need to either rate this movie or click "seen it" before you can write a review.</p>
+}
+@foreach (var sg in Model.RecentShitsAndGiggles)
+{
+    <div class="well">
+        <p class="muted">@Html.ActionLink(sg.UserProfile.UserName, "index", "user", new { id = sg.UserProfileID }, null) - @sg.DateAdded.ToString("MM/dd/yyyy")</p>
+        <div class="row-fluid">
+            <div class="span6">
+                <legend>Shits</legend>
+                @sg.Shits
+            </div>
+            <div class="span6">
+                <legend>Giggles</legend>
+                @sg.Giggles
+            </div>
+        </div>
+    </div>
+}

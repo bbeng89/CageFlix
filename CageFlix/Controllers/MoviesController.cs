@@ -61,5 +61,17 @@ namespace CageFlix.Controllers
             return View(vm);
         }
 
+        //submitting a review
+        [HttpPost]
+        public ActionResult Details(ReviewViewModel review)
+        {
+            var user = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId);
+            var usermovie = user.UserMovies.Single(um => um.MovieID == review.MovieID);
+            usermovie.Shits = review.Shits;
+            usermovie.Giggles = review.Giggles;
+            db.Save();
+            this.SetAlert("Your review has been added", AlertType.Success);
+            return RedirectToAction("details", new { id = review.MovieID });
+        }
     }
 }

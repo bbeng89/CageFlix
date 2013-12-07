@@ -41,5 +41,11 @@ namespace CageFlix.ViewModels
 
             return 0;
         }
+
+        public bool UserHasReviewedMovie(Movie movie)
+        {
+            var usermovie = this.UserMovies.Single(um => um.MovieID == movie.ID);
+            return this.UserMovies != null && (usermovie.Shits != null || usermovie.Giggles != null);
+        }
     }
 }

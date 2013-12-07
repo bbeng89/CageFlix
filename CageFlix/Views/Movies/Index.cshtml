@@ -58,6 +58,10 @@
                     @if (Model.UserHasSeenMovie(movie))
                     {
                         <p class="text-success"><i class="icon-check"></i> You've seen this movie</p>
+                        if (!Model.UserHasReviewedMovie(movie))
+                        {
+                            <p><a href="@Url.Action("details", "movies", new { area = "", id = movie.ID })#shits-n-gigs">Write a Review</a></p>
+                        }
                     }
                     else
                     {
@@ -183,7 +187,6 @@
                             },
                             success: function(){
                                 userRating.text(ui.value).removeClass('muted');
-                                console.log($(this).closest('.addMovieContainer'));
                             }
                         });
                     }
@@ -213,6 +216,7 @@
                             sender.data('loading-text', '');
                             sender.remove();
                             parent.append($('<p><i class="icon-check"></i> Movie added</p>'));
+                            parent.append($('<p><a href="/movies/details/' + sender.data('movieid') + '#shits-n-gigs">Write a Review</a></p>'));
                             count++;
                             counter.text(count);
                         }

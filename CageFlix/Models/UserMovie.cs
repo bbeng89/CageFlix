@@ -33,5 +33,7 @@ namespace CageFlix.Models
         public virtual UserProfile UserProfile { get; set; }
 
         public virtual Movie Movie { get; set; }
+
+        public bool Reviewed { get { return this.Shits != null || this.Giggles != null; } }
     }
 }
