@@ -1,0 +1,26 @@
+﻿@model CageFlix.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "New Administrator";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>Admin details</legend>
+        @Html.LabelFor(m => m.UserName)
+        @Html.TextBoxFor(m => m.UserName)
+
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password)
+
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword)
+        <br />
+        <button type="submit" class="btn btn-primary btn-large">Sign Up</button>
+    </fieldset>
+    @Html.ValidationSummary()
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

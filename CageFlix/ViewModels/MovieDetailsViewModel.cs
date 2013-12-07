@@ -25,18 +25,17 @@ namespace CageFlix.ViewModels
 
         public bool UserHasSeenMovie { get; set; }
 
-        public MovieDetailsViewModel(Movie movie, CageFlixHelpers helpers)
+        public MovieDetailsViewModel(Movie movie, CageFlixHelpers helpers, UserProfile currentUser)
         {
             this.Movie = movie;
             this.Helpers = helpers;
             this.NumRatings = movie.UserMovies.Count();
             this.AvgRating = helpers.GetAvgCageFlixScore(movie);
-            this.RecentShitsAndGiggles = movie.UserMovies.ToList();
-            if (WebSecurity.IsAuthenticated)
+            this.RecentShitsAndGiggles = movie.UserMovies.ToList().Where(um => um.Reviewed);
+            if (currentUser != null)
             {
-                var userid = WebSecurity.CurrentUserId;
-                this.UserHasReviewedMovie = this.RecentShitsAndGiggles.Where(sg => sg.Reviewed).Select(sg => sg.UserProfileID).Contains(userid);
-                this.UserHasSeenMovie = this.RecentShitsAndGiggles.Select(sg => sg.UserProfileID).Contains(userid);
+                this.UserHasReviewedMovie = currentUser.UserMovies.Where(sg => sg.MovieID == this.Movie.ID && sg.Reviewed).Count() > 0;
+                this.UserHasSeenMovie = currentUser.UserMovies.Where(um => um.MovieID == this.Movie.ID).Count() > 0;
             }
             else
             {

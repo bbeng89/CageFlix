@@ -42,6 +42,8 @@
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                                             <ul class="dropdown-menu">
                                                 <li>@Html.ActionLink("Manage Movies", "index", "movies", new { area = "admin" }, null)</li>
+                                                <li>@Html.ActionLink("Manage Users", "index", "users", new { area = "admin" }, null)</li>
+                                                <li>@Html.ActionLink("Manage Admins", "admins", "users", new { area = "admin" }, null)</li>
                                             </ul>
                                         </li>
                                     </ul>
