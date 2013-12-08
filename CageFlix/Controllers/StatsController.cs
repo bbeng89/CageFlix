@@ -10,6 +10,13 @@ namespace CageFlix.Controllers
 {
     public class StatsController : BaseController
     {
+        //Always keep size of >= 8 (one color for each rating from 3 - 11),
+        //otherwise out of bounds will be thrown
+        public static readonly string[] colors = 
+        {
+            "red", "orange", "green", "blue", "indigo", "violet", "black", "white", "purple"
+        };
+
         public StatsController(IUnitOfWork uow) : base(uow) { }
 
         public ActionResult Index()
@@ -57,6 +64,18 @@ namespace CageFlix.Controllers
                                            Count = x.Count()
                                          }).OrderBy(x => x.Year)
                                            .ToDictionary(d => d.Year, d => d.Count);
+            #endregion
+
+            #region UserRatingsDistribution
+            stats.UserRatingsDistribution = new List<UserRatingsDistribution>();
+
+            for (int i = 3; i <= 11; i++)
+            {
+                double percentage = (double)(userMovies.Where(um => um.Rating == i).Count()) /
+                                    (double)(userMovies.Where(um => um.Rating != null).Count());
+
+                stats.UserRatingsDistribution.Add(new UserRatingsDistribution(colors[i - 3], i, (int)(percentage * 100)));
+            }
             #endregion
 
             return View(stats);

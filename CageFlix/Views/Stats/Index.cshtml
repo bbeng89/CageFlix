@@ -18,7 +18,7 @@
     <h4>Most Watched Movie: @Html.ActionLink(Model.MostViewed.Title, "details", "movies", new { id = Model.MostViewed.ID }, null)</h4>
     <br />
     <h4>Lowest Rated Movie: @Html.ActionLink(Model.LowestRated.Title, "details", "movies", new { id = Model.LowestRated.ID }, null)</h4>
-    <h4>Highest Rated Movie: @Html.ActionLink(Model.HighestRated.Title, "details", "movies", new { id = Model.HighestRated.ID }, null)e</h4>
+    <h4>Highest Rated Movie: @Html.ActionLink(Model.HighestRated.Title, "details", "movies", new { id = Model.HighestRated.ID }, null)</h4>
     <br />
     <h4>Average Rating Across All Movies: @Model.AverageRating.ToString("0.0")</h4>
     <br />
@@ -41,11 +41,15 @@
         </div>
     }
 </div>
-    
-<!--TODO - Implement bar showing total movies as composite of liked / disliked -->
-<!--Snippet below serves as example placeholder from bootstrap -->
+<hr />
+<h2>Year Breakdown</h2>
+<hr />
+<h2>User Ratings Distribution</h2>
 <div class="progress">
-  <div class="bar bar-success" style="width: 35%;"></div>
-  <div class="bar bar-warning" style="width: 20%;"></div>
-  <div class="bar bar-danger" style="width: 10%;"></div>
+    @{                      
+        foreach(var userRating in Model.UserRatingsDistribution)
+        {
+            <div class="bar bar-@userRating.color" style="width:@userRating.percentage%">@userRating.rating</div>
+        }
+    }
 </div>

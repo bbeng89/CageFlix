@@ -20,5 +20,20 @@ namespace CageFlix.ViewModels
 
         public Dictionary<string, int> MpaaRatingsBreakdown { get; set; }
         public Dictionary<int?, int> YearBreakdown { get; set; }
+        public List<UserRatingsDistribution> UserRatingsDistribution { get; set; }
+    }
+
+    public class UserRatingsDistribution
+    {
+        public UserRatingsDistribution(string color, int rating, int percentage)
+        {
+            this.color = color;
+            this.rating = rating;
+            this.percentage = percentage;
+        }
+
+        public string color { get; set; }
+        public int rating { get; set; }
+        public int percentage { get; set; }
     }
 }
