@@ -28,7 +28,7 @@
                             <ul class="nav">
                                 <li class="divider-vertical"></li>
                                 <li class="@(ViewBag.Active == "home" ? "active" : "")">@Html.ActionLink("Home", "index", "home", new { area = "" }, null)</li>
-                                <li><a href="#">About</a></li>
+                                <li class="@(ViewBag.Active == "about" ? "active" : "")">@Html.ActionLink("About", "about", "home", new { area = "" }, null)</li>
                                 <li class="@(ViewBag.Active == "movieCatalog" ? "active" : "")">@Html.ActionLink("Movie Catalog", "index", "movies", new { area = "" }, null)</li>
                                 <li class="@(ViewBag.Active == "cageRoulette" ? "active" : "")">@Html.ActionLink("Cage Roulette", "index", "roulette", new { area = ""}, null)</li>
                                 <li class="@(ViewBag.Active == "stats" ? "active" : "")">@Html.ActionLink("Stats", "index", "stats", new { area = ""}, null)</li>

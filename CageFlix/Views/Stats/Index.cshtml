@@ -14,6 +14,9 @@
 </div>
 <hr />
 <div class="muted">
+    <h4>Total Movies: @Model.TotalMovies</h4>
+    <h4>Total Ratings: @Model.TotalRatings</h4>
+    <br />
     <h4>Least Watched Movie: @Html.ActionLink(Model.LeastViewed.Title, "details", "movies", new { id = Model.LeastViewed.ID }, null)</h4>
     <h4>Most Watched Movie: @Html.ActionLink(Model.MostViewed.Title, "details", "movies", new { id = Model.MostViewed.ID }, null)</h4>
     <br />

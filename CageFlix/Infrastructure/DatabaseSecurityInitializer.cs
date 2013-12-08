@@ -72,7 +72,7 @@ namespace CageFlix.Infrastructure
             movies.Add(new Movie { Title = "Guarding Tess", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/12738.json" });
             movies.Add(new Movie { Title = "It Could Happen to You", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/11028.json" });
             movies.Add(new Movie { Title = "Trapped in Paradise", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/11376.json" });
-            movies.Add(new Movie { Title = "Kiss of Death", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/15057.json", NetflixLink = "http://movies.netflix.com/WiMovie/Leaving_Las_Vegas/692295?trkid=7808591" });
+            movies.Add(new Movie { Title = "Kiss of Death", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/15057.json" });
             movies.Add(new Movie { Title = "Leaving Las Vegas", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/13165.json" });
             movies.Add(new Movie { Title = "The Rock", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/12970.json" });
             movies.Add(new Movie { Title = "Con Air", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/13119.json" });
@@ -80,7 +80,7 @@ namespace CageFlix.Infrastructure
             movies.Add(new Movie { Title = "City of Angels", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/10287.json" });
             movies.Add(new Movie { Title = "Snake Eyes", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/14290.json" });
             movies.Add(new Movie { Title = "8MM", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/13766.json" });
-            movies.Add(new Movie { Title = "Bringing Out the Dead", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/16493.json", NetflixLink = "http://movies.netflix.com/WiMovie/Bringing_Out_the_Dead/60000088?trkid=7808591" });
+            movies.Add(new Movie { Title = "Bringing Out the Dead", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/16493.json" });
             movies.Add(new Movie { Title = "Gone in Sixty Seconds", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/17108.json" });
             movies.Add(new Movie { Title = "The Family Man", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/10203.json" });
             movies.Add(new Movie { Title = "Captain Corelli's Mandolin", RottenTomatoesApiUrl = "http://api.rottentomatoes.com/api/public/v1.0/movies/14200.json" });

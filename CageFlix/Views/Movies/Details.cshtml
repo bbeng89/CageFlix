@@ -24,6 +24,26 @@
                     <td>MPAA Rating</td>
                     <td>@Model.Movie.MpaaRating</td>
                 </tr>
+                <tr>
+                    <td>Links</td>
+                    <td>
+                        @if (Model.Movie.NetflixLink != null)
+                        {
+                            <a href="@Model.Movie.NetflixLink" target="_blank"><img src="@Url.Content("~/assets/img/netflix.png")" alt="Watch on Netflix" /></a>
+                            @:&nbsp;
+                        }
+                        @if (Model.Movie.ImdbLink != null)
+                        {
+                            <a href="@Model.Movie.ImdbLink" target="_blank"><img src="@Url.Content("~/assets/img/imdb.png")" alt="View movie on IMDB" /></a>
+                            @:&nbsp;
+                        }
+                        @if (Model.Movie.RottenTomatoesLink != null)
+                        {
+                            <a href="@Model.Movie.RottenTomatoesLink" target="_blank"><img src="http://images.rottentomatoes.com/images/syndication/downloads/rt_logo.gif" height="30" width="88"></a>
+                            @:&nbsp;
+                        }
+                    </td>
+                </tr>
             </tbody>
         </table>
         <h2 class="@Html.CageFlixRatingClass(Model.AvgRating)" style="display:inline">@Model.AvgRating</h2> &nbsp; 

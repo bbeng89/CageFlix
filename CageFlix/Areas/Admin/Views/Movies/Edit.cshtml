@@ -127,6 +127,9 @@
             $('#DetailedImageUrl').val(data.posters.detailed);
             $('#OriginalImageUrl').val(data.posters.original);
             $('#RottenTomatoesLink').val(data.links.alternate);
+            if (data.alternate_ids && data.alternate_ids.imdb) {
+                $('#ImdbLink').val('http://www.imdb.com/title/tt' + data.alternate_ids.imdb);
+            }
         }
     </script>
 }

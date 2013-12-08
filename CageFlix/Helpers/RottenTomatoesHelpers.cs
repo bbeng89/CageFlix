@@ -40,6 +40,10 @@ namespace CageFlix.Helpers
                     movie.DetailedImageUrl = obj.posters.detailed;
                     movie.OriginalImageUrl = obj.posters.original;
                     movie.RottenTomatoesLink = obj.links.alternate;
+                    if (obj.alternate_ids != null && obj.alternate_ids.imdb != null)
+                    {
+                        movie.ImdbLink = "http://www.imdb.com/title/tt" + obj.alternate_ids.imdb;
+                    }
                 }
             }
             return movie;

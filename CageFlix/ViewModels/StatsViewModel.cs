@@ -7,6 +7,9 @@ namespace CageFlix.ViewModels
 {
     public class StatsViewModel : Controller
     {
+        public int TotalMovies { get; set; }
+        public int TotalRatings { get; set; }
+
         public Movie LeastViewed { get; set; }
         public Movie MostViewed { get; set; }
 

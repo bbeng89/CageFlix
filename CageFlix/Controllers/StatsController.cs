@@ -25,6 +25,9 @@ namespace CageFlix.Controllers
             IQueryable<UserMovie> userMovies = db.UserMovieRepository.GetAll();
             StatsViewModel stats = new StatsViewModel();
 
+            stats.TotalMovies = movies.Count();
+            stats.TotalRatings = userMovies.Where(um => um.Rating != null).Count();
+
             #region MoviesViewed
             stats.LeastViewed = movies.Where(m => m.UserMovies.Count == movies.Min(mm => mm.UserMovies.Count)).First();
             stats.MostViewed = movies.Where(m => m.UserMovies.Count == movies.Max(mm => mm.UserMovies.Count)).First();
