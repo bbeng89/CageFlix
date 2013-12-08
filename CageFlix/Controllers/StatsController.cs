@@ -19,19 +19,9 @@ namespace CageFlix.Controllers
             StatsViewModel stats = new StatsViewModel();
 
             #region MoviesViewed
-            //Aggregate movie ID counts to determine min / max
-            int leastViewed = userMovies.GroupBy(m => m.MovieID)
-                                    .OrderBy(x => x.Count(y => y.MovieID != null))
-                                    .Select(x => x.Key).First();
-            int mostViewed = userMovies.GroupBy(m => m.MovieID)
-                                   .OrderByDescending(x => x.Count(y => y.MovieID != null))
-                                   .Select(x => x.Key).First();
+            stats.LeastViewed = movies.Where(m => m.UserMovies.Count == movies.Min(mm => mm.UserMovies.Count)).First();
+            stats.MostViewed = movies.Where(m => m.UserMovies.Count == movies.Max(mm => mm.UserMovies.Count)).First();
 
-            //Select movie based on IDs determined above
-            stats.LeastViewed = userMovies.Select(m => m.Movie)
-                                      .Where(i => i.ID == leastViewed).First();
-            stats.MostViewed = userMovies.Select(m => m.Movie)
-                                     .Where(i => i.ID == mostViewed).First();
             #endregion
 
             #region UserRatings

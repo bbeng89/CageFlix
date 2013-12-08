@@ -14,43 +14,33 @@
 </div>
 <hr />
 <div class="muted">
-    <h4>Least Watched Movie: @Model.LeastViewed.Title</h4>
-    <h4>Most Watched Movie :@Model.MostViewed.Title</h4>
+    <h4>Least Watched Movie: @Html.ActionLink(Model.LeastViewed.Title, "details", "movies", new { id = Model.LeastViewed.ID }, null)</h4>
+    <h4>Most Watched Movie: @Html.ActionLink(Model.MostViewed.Title, "details", "movies", new { id = Model.MostViewed.ID }, null)</h4>
     <br />
-    <h4>Lowest Rated Movie: @Model.LowestRated.Title</h4>
-    <h4>Highest Rated Movie: @Model.HighestRated.Title</h4>
+    <h4>Lowest Rated Movie: @Html.ActionLink(Model.LowestRated.Title, "details", "movies", new { id = Model.LowestRated.ID }, null)</h4>
+    <h4>Highest Rated Movie: @Html.ActionLink(Model.HighestRated.Title, "details", "movies", new { id = Model.HighestRated.ID }, null)e</h4>
     <br />
     <h4>Average Rating Across All Movies: @Model.AverageRating.ToString("0.0")</h4>
     <br />
-    <h4>Shortest Runtime: @Model.ShortestRuntime.Title</h4>
-    <h4>Longest Runtime: @Model.LongestRuntime.Title</h4>
+    <h4>Shortest Runtime: @Html.ActionLink(Model.ShortestRuntime.Title, "details", "movies", new { id = Model.ShortestRuntime.ID }, null)</h4>
+    <h4>Longest Runtime: @Html.ActionLink(Model.LongestRuntime.Title, "details", "movies", new { id = Model.LongestRuntime.ID }, null)</h4>
     <br />
-    <h4>Average Runtime: @Model.AverageRuntime</h4>
+    <h4>Average Runtime: @Model.AverageRuntime minutes</h4>
 </div>
 <hr />
-<h2>MPAA Ratings Breakdown:</h2>
-<table class="table" style="width:100px">
-    <tr>
-        <td><span class="label label-default">G</span></td>
-        <td><h3>@Model.MpaaRatingsBreakdown["G"]</h3></td>
-    </tr>
-    <tr>
-        <td><span class="label label-default">PG</span></td>
-        <td><h3>@Model.MpaaRatingsBreakdown["PG"]</h3></td>
-    </tr>
-    <tr>
-        <td><span class="label label-default">PG-13</span></td>
-        <td><h3>@Model.MpaaRatingsBreakdown["PG-13"]</h3></td>
-    </tr>
-    <tr>
-        <td><span class="label label-default">R</span></td>
-        <td><h3>@Model.MpaaRatingsBreakdown["R"]</h3></td>
-    </tr>
-    <tr>
-        <td><span class="label label-default">NC-17</span></td>
-        <td><h3>@Model.MpaaRatingsBreakdown["NC-17"]</h3></td>
-    </tr>
-</table>
+<h2>MPAA Ratings Breakdown</h2>
+<div class="row-fluid">
+    @foreach(KeyValuePair<string, int> kvp in Model.MpaaRatingsBreakdown)
+    {
+        <div class="span2">
+            <div style="text-align:center" class="well">
+                <span class="label label-default">@kvp.Key</span>
+                <hr />
+                <h4>@kvp.Value</h4>
+            </div>
+        </div>
+    }
+</div>
     
 <!--TODO - Implement bar showing total movies as composite of liked / disliked -->
 <!--Snippet below serves as example placeholder from bootstrap -->
