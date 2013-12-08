@@ -1,0 +1,61 @@
+﻿@model StatsViewModel
+
+@{
+    ViewBag.Title = "Stats";
+}
+
+<div class="jumbotron">
+    <h3>
+        <a href="http://www.youtube.com/watch?v=aEtm69mLK6w">
+            That's right, Alva. It's a horrible, horrible job; <br />sifting through old contract after old contract.
+        </a>
+    </h3>
+    <h4 style="color:orangered">But somebody's gotta do it</h4>
+</div>
+<hr />
+<div class="muted">
+    <h4>Least Watched Movie: @Model.LeastViewed.Title</h4>
+    <h4>Most Watched Movie :@Model.MostViewed.Title</h4>
+    <br />
+    <h4>Lowest Rated Movie: @Model.LowestRated.Title</h4>
+    <h4>Highest Rated Movie: @Model.HighestRated.Title</h4>
+    <br />
+    <h4>Average Rating Across All Movies: @Model.AverageRating.ToString("0.0")</h4>
+    <br />
+    <h4>Shortest Runtime: @Model.ShortestRuntime.Title</h4>
+    <h4>Longest Runtime: @Model.LongestRuntime.Title</h4>
+    <br />
+    <h4>Average Runtime: @Model.AverageRuntime</h4>
+</div>
+<hr />
+<h2>MPAA Ratings Breakdown:</h2>
+<table class="table" style="width:100px">
+    <tr>
+        <td><span class="label label-default">G</span></td>
+        <td><h3>@Model.MpaaRatingsBreakdown["G"]</h3></td>
+    </tr>
+    <tr>
+        <td><span class="label label-default">PG</span></td>
+        <td><h3>@Model.MpaaRatingsBreakdown["PG"]</h3></td>
+    </tr>
+    <tr>
+        <td><span class="label label-default">PG-13</span></td>
+        <td><h3>@Model.MpaaRatingsBreakdown["PG-13"]</h3></td>
+    </tr>
+    <tr>
+        <td><span class="label label-default">R</span></td>
+        <td><h3>@Model.MpaaRatingsBreakdown["R"]</h3></td>
+    </tr>
+    <tr>
+        <td><span class="label label-default">NC-17</span></td>
+        <td><h3>@Model.MpaaRatingsBreakdown["NC-17"]</h3></td>
+    </tr>
+</table>
+    
+<!--TODO - Implement bar showing total movies as composite of liked / disliked -->
+<!--Snippet below serves as example placeholder from bootstrap -->
+<div class="progress">
+  <div class="bar bar-success" style="width: 35%;"></div>
+  <div class="bar bar-warning" style="width: 20%;"></div>
+  <div class="bar bar-danger" style="width: 10%;"></div>
+</div>

@@ -197,6 +197,7 @@
     <Compile Include="Areas\Admin\ViewModels\HomeViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UsersViewModel.cs" />
     <Compile Include="Controllers\RouletteController.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helpers\CageFlixHelpers.cs" />
     <Compile Include="ViewModels\MovieDetailsViewModel.cs" />
@@ -385,7 +386,7 @@
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Roulette\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Stats.cshtml" />
+    <Content Include="Views\Stats\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

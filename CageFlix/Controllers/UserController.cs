@@ -48,16 +48,5 @@ namespace CageFlix.Controllers
             db.Save();
             return Json(new { status = "success" });
         }
-
-        public ActionResult Stats()
-        {
-            IQueryable<UserMovie> movies = db.UserMovieRepository.GetAll();
-            StatsViewModel stats = new StatsViewModel();
-
-            stats.LowestRated = movies.Where(m => m.Rating == movies.Min(um => um.Rating)).Select(rm => rm.Movie).First();
-            stats.HighestRated = movies.Where(m => m.Rating == movies.Max(um => um.Rating)).Select(rm => rm.Movie).First();
-
-            return View(stats);
-        }
     }
 }
