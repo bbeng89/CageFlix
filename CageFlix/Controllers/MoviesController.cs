@@ -57,7 +57,10 @@ namespace CageFlix.Controllers
         {
             var movie = db.MovieRepository.GetByID(id);
             var helper = new CageFlixHelpers(db);
-            var vm = new MovieDetailsViewModel(movie, helper);
+            UserProfile user = null;
+            if(WebSecurity.IsAuthenticated)
+                user = db.UserProfileRepository.GetByID(WebSecurity.CurrentUserId);
+            var vm = new MovieDetailsViewModel(movie, helper, user);
             return View(vm);
         }
 

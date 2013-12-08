@@ -79,6 +79,7 @@ else if (!Model.UserHasSeenMovie)
 {
     <div class="well">
         <p class="muted">@Html.ActionLink(sg.UserProfile.UserName, "index", "user", new { id = sg.UserProfileID }, null) - @sg.DateAdded.ToString("MM/dd/yyyy")</p>
+        <p>CageFlix Rating: <span class="@Html.CageFlixRatingClass(Model.AvgRating)">@sg.Rating</span></p>
         <div class="row-fluid">
             <div class="span6">
                 <legend>Shits</legend>
