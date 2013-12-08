@@ -1,0 +1,24 @@
+﻿@model StatsViewModel
+
+@{
+    ViewBag.Title = "Stats";
+}
+
+<div class="jumbotron">
+    <h2>Stats</h2>
+    <h3>
+        <a href="http://www.youtube.com/watch?v=rdctx_-BZMY">I could eat a peach for hours.</a>
+    </h3>
+</div>
+<div class="muted">
+    <h4>Lowest Rated Movie: @Model.LowestRated.Title</h4>
+    <h4>Highest Rated Movie: @Model.HighestRated.Title</h4>
+</div>
+
+<!--TODO - Implement bar showing total movies as composite of liked / disliked -->
+<!--Snippet below serves as example placeholder from bootstrap -->
+<div class="progress">
+  <div class="bar bar-success" style="width: 35%;"></div>
+  <div class="bar bar-warning" style="width: 20%;"></div>
+  <div class="bar bar-danger" style="width: 10%;"></div>
+</div>
