@@ -1,6 +1,6 @@
 ﻿@model UserProfileViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Model.User.UserName;
 }
 
 <h2>@Model.User.UserName</h2>
@@ -23,9 +23,12 @@ else
         <div class="row-fluid">
             <div class="span2">
                 <p>@usermovie.DateAdded.ToString("MM/dd/yyyy")</p>
-                <img src="@usermovie.Movie.ProfileImageUrl" alt="@usermovie.Movie.Title" />
+                <a href="@Url.Action("details", "movies", new { id = usermovie.MovieID })">
+                    <img src="@usermovie.Movie.ProfileImageUrl" alt="@usermovie.Movie.Title" />
+                </a>
             </div>
             <div class="span8">
+                <h3>@Html.ActionLink(usermovie.Movie.Title, "details", "movies", new { id = usermovie.MovieID }, null)</h3>
                 <h4>Shits</h4>
                 @if(usermovie.Shits == null)
                 {

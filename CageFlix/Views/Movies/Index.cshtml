@@ -51,7 +51,9 @@
 {
     <div class="row-fluid">
         <div class="span2">
-            <img src="@movie.ProfileImageUrl" alt="@movie.Title" />
+            <a href="@Url.Action("details", "movies", new { area = "", id = movie.ID })">
+                <img src="@movie.ProfileImageUrl" alt="@movie.Title" />
+            </a>
             @if(!User.IsInRole("Admin"))
             {
                 <div class="addMovieContainer">
@@ -94,15 +96,22 @@
             {
                 <p>@movie.CriticsConsensus</p>
             }
-            <div class="clearfix">
-                <div class="pull-left">
-                    @if (movie.NetflixLink != null)
-                    {
-                        <img src="@Url.Content("~/assets/img/netflix.png")" /> <a href="@movie.NetflixLink" target="_blank">Watch on Netflix</a>
-                    }
-                </div>
-                <p class="pull-right"><a href="@Url.Action("details", "movies", new { area = "", id = movie.ID })">All the gory details &raquo;</a></p>
-            </div>
+            <hr />
+            @if (movie.NetflixLink != null)
+            {
+                <a href="@movie.NetflixLink" target="_blank"><img src="@Url.Content("~/assets/img/netflix.png")" alt="Watch on Netflix" /></a>
+                @:&nbsp;
+            }
+            @if (movie.ImdbLink != null)
+            {
+                <a href="@movie.ImdbLink" target="_blank"><img src="@Url.Content("~/assets/img/imdb.png")" alt="View movie on IMDB" /></a>
+                @:&nbsp;
+            }
+            @if (movie.RottenTomatoesLink != null)
+            {
+                <a href="@movie.RottenTomatoesLink" target="_blank"><img src="http://images.rottentomatoes.com/images/syndication/downloads/rt_logo.gif" height="30" width="88"></a>
+                @:&nbsp;
+            }
         </div>
         <div class="span2">
             @if (!User.Identity.IsAuthenticated || User.IsInRole("Admin"))
