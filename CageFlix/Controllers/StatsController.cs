@@ -19,6 +19,7 @@ namespace CageFlix.Controllers
 
         public StatsController(IUnitOfWork uow) : base(uow) { }
 
+        [OutputCache(Duration=3600)]
         public ActionResult Index()
         {
             IQueryable<Movie> movies = db.MovieRepository.GetAll();
