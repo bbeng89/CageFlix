@@ -28,7 +28,7 @@ namespace CageFlix.ViewModels
 
     public class UserRatingsDistribution
     {
-        public UserRatingsDistribution(string color, int rating, int percentage)
+        public UserRatingsDistribution(string color, int rating, double percentage)
         {
             this.color = color;
             this.rating = rating;
@@ -37,6 +37,11 @@ namespace CageFlix.ViewModels
 
         public string color { get; set; }
         public int rating { get; set; }
-        public int percentage { get; set; }
+        public double percentage { get; set; }
+        public string progressWidth
+        {
+            get { return string.Format("{0:0.00}%", this.percentage); }
+        }
+
     }
 }

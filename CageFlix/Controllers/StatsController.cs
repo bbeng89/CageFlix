@@ -19,7 +19,7 @@ namespace CageFlix.Controllers
 
         public StatsController(IUnitOfWork uow) : base(uow) { }
 
-        [OutputCache(Duration=3600)]
+        //[OutputCache(Duration=3600)]
         public ActionResult Index()
         {
             IQueryable<Movie> movies = db.MovieRepository.GetAll();
@@ -78,7 +78,7 @@ namespace CageFlix.Controllers
                 double percentage = (double)(userMovies.Where(um => um.Rating == i).Count()) /
                                     (double)(userMovies.Where(um => um.Rating != null).Count());
 
-                stats.UserRatingsDistribution.Add(new UserRatingsDistribution(colors[i - 3], i, (int)(percentage * 100)));
+                stats.UserRatingsDistribution.Add(new UserRatingsDistribution(colors[i - 3], i, (percentage * 100)));
             }
             #endregion
 

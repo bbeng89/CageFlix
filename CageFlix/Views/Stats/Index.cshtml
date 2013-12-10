@@ -52,7 +52,7 @@
     @{                      
         foreach(var userRating in Model.UserRatingsDistribution)
         {
-            <div class="bar bar-@userRating.color" style="width:@userRating.percentage%">@userRating.rating</div>
+            <div class="bar bar-@userRating.color" style="width:@userRating.progressWidth">@userRating.rating</div>
         }
     }
 </div>
